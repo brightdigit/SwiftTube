@@ -1,15 +1,14 @@
 import Foundation
 
-
 public protocol Model: Codable, Equatable {}
 
 public typealias DateTime = JSONOptionalDate
 public typealias File = Data
 public typealias ID = UUID
 
-fileprivate let _dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
-                                                        locale: Locale(identifier: "en_US_POSIX"),
-                                                        calendar: Calendar(identifier: .gregorian))
+private let _dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+                                                   locale: Locale(identifier: "en_US_POSIX"),
+                                                   calendar: Calendar(identifier: .gregorian))
 
 public protocol ResponseDecoder {
   func decode<T: Decodable>(_ type: T.Type, from: Data) throws -> T
@@ -28,7 +27,8 @@ extension Model {
     guard
       let jsonData = try? JSONEncoder().encode(self),
       let jsonValue = try? JSONSerialization.jsonObject(with: jsonData),
-      let jsonDictionary = jsonValue as? [String: Any] else {
+      let jsonDictionary = jsonValue as? [String: Any]
+    else {
       return [:]
     }
     return jsonDictionary
@@ -153,7 +153,7 @@ public extension KeyedDecodingContainer {
     return array
   }
 
-  public func decodeArrayIfPresent<T: Decodable>(_ key: K) throws -> [T]? {
+  func decodeArrayIfPresent<T: Decodable>(_ key: K) throws -> [T]? {
     try decodeOptional {
       if contains(key) {
         return try decodeArray(key)
@@ -229,7 +229,8 @@ let dateDecoder: (Decoder) throws -> Date = { decoder in
   formatterWithoutMilliseconds.calendar = Calendar(identifier: .gregorian)
 
   guard let date = formatterWithMilliseconds.date(from: string) ??
-    formatterWithoutMilliseconds.date(from: string) else {
+    formatterWithoutMilliseconds.date(from: string)
+  else {
     throw DecodingError.dataCorruptedError(in: container, debugDescription: "Could not decode date")
   }
   return date
@@ -254,7 +255,8 @@ public struct DateDay: Codable, Comparable {
     let dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: date)
     guard let year = dateComponents.year,
           let month = dateComponents.month,
-          let day = dateComponents.day else {
+          let day = dateComponents.day
+    else {
       fatalError("Date does not contain correct components")
     }
     self.year = year
