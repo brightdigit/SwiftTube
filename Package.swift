@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "Swiftube",
+  name: "SwiftTube",
   platforms: [
     .macOS(.v10_15),
     .iOS(.v10),
@@ -11,7 +11,7 @@ let package = Package(
     .watchOS(.v3)
   ],
   products: [
-    .library(name: "Swiftube", targets: ["Swiftube"])
+    .library(name: "SwiftTube", targets: ["SwiftTube"])
   ],
   dependencies: [
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
@@ -23,7 +23,7 @@ let package = Package(
     .package(url: "https://github.com/brightdigit/Prch.git", from: "0.1.0")
   ],
   targets: [
-    .target(name: "Swiftube", dependencies: ["Prch"])
+    .target(name: "SwiftTube", dependencies: ["Prch"])
   ]
 )
 

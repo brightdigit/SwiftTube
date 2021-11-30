@@ -1,7 +1,8 @@
 import Foundation
+import Prch
 
 /** The YouTube Data API v3 is an API that provides access to YouTube data, such as videos, playlists, and channels. */
-public enum Swifttube {
+public enum SwiftTube {
   /// Whether to discard any errors when decoding optional properties
   public static var safeOptionalDecoding = false
 
@@ -18,7 +19,26 @@ public enum Swifttube {
   public enum Server {
     public static let main = "https://youtube.googleapis.com/"
   }
+
+  public struct API {}
 }
+
+//extension SwiftTube.API : Prch.API {
+//  public var baseURL: URL {
+//    return SwiftTube.Server.main
+//  }
+//  
+//  public var headers: [String : String] {
+//    <#code#>
+//  }
+//  
+//  public var decoder: ResponseDecoder {
+//    <#code#>
+//  }
+//  
+//  
+//}
+
 
 public enum AbuseReports {}
 public enum Activities {}
