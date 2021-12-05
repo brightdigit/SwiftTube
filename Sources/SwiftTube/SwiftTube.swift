@@ -1,16 +1,6 @@
 import Foundation
 import Prch
 
-extension URL {
-  init<S: StringProtocol>(staticString string: S) {
-    guard let url = URL(string: "\(string)") else {
-      preconditionFailure("Invalid static URL string: \(string)")
-    }
-
-    self = url
-  }
-}
-
 /** The YouTube Data API v3 is an API that provides access to YouTube data, such as videos, playlists, and channels. */
 public enum SwiftTube {
   /// Whether to discard any errors when decoding optional properties
