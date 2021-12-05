@@ -18,7 +18,7 @@ public struct VideoContentDetails: Model {
   /** Specifies the projection format of the video. */
   public enum Projection: String, Codable, Equatable, CaseIterable {
     case rectangular
-    case _360 = "360"
+    case VR360 = "360"
   }
 
   /** The value of captions indicates whether the video has captions or not. */

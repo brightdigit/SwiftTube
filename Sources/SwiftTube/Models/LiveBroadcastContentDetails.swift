@@ -23,7 +23,7 @@ public struct LiveBroadcastContentDetails: Model {
   public enum Projection: String, Codable, Equatable, CaseIterable {
     case projectionUnspecified
     case rectangular
-    case _360 = "360"
+    case VR360 = "360"
     case mesh
   }
 

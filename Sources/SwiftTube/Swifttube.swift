@@ -1,7 +1,18 @@
 import Foundation
+import Prch
+
+extension URL {
+  init<S: StringProtocol>(staticString string: S) {
+    guard let url = URL(string: "\(string)") else {
+      preconditionFailure("Invalid static URL string: \(string)")
+    }
+
+    self = url
+  }
+}
 
 /** The YouTube Data API v3 is an API that provides access to YouTube data, such as videos, playlists, and channels. */
-public enum Swifttube {
+public enum SwiftTube {
   /// Whether to discard any errors when decoding optional properties
   public static var safeOptionalDecoding = false
 
@@ -17,6 +28,25 @@ public enum Swifttube {
 
   public enum Server {
     public static let main = "https://youtube.googleapis.com/"
+  }
+
+  public struct API: Prch.API {
+    public init(token: String? = nil) {
+      headers = [
+        "Authorization": token.map { "Bearer \($0)" },
+        "Accept": "application/json"
+      ].compactMapValues { $0 }
+    }
+
+    public let baseURL: URL = .init(staticString: SwiftTube.Server.main)
+
+    public let headers: [String: String]
+
+    public let decoder: ResponseDecoder = {
+      let decoder = JSONDecoder()
+      decoder.dateDecodingStrategy = .formatted(SwiftTube.dateEncodingFormatter)
+      return decoder
+    }()
   }
 }
 
