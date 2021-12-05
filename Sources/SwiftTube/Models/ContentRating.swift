@@ -1,6 +1,8 @@
 import Foundation
 import Prch
 
+// swiftlint:disable file_length function_body_length type_body_length
+
 /** Ratings schemes. The country-specific ratings are mostly for movies and shows. LINT.IfChange */
 public struct ContentRating: Model {
   /** The video's Australian Classification Board (ACB) or Australian Communications and Media Authority (ACMA) rating. ACMA ratings are used to classify children's television programming. */

@@ -20,18 +20,18 @@ public enum SwiftTube {
     public static let main = "https://youtube.googleapis.com/"
   }
 
-  public struct API : Prch.API  {
+  public struct API: Prch.API {
     public init(token: String? = nil) {
-      self.headers =   [
-        "Authorization" : token.map{"Bearer \($0)"},
-        "Accept" : "application/json"
-      ].compactMapValues{$0}
+      headers = [
+        "Authorization": token.map { "Bearer \($0)" },
+        "Accept": "application/json"
+      ].compactMapValues { $0 }
     }
-    
+
     public let baseURL: URL = .init(string: SwiftTube.Server.main)!
-    
-    public let headers: [String : String]
-    
+
+    public let headers: [String: String]
+
     public let decoder: ResponseDecoder = {
       let decoder = JSONDecoder()
       decoder.dateDecodingStrategy = .formatted(SwiftTube.dateEncodingFormatter)
@@ -39,7 +39,6 @@ public enum SwiftTube {
     }()
   }
 }
-
 
 public enum AbuseReports {}
 public enum Activities {}

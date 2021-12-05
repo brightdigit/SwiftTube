@@ -58,8 +58,8 @@ public extension Search {
     /** Filter on 3d videos. */
     public enum VideoDimension: String, Codable, Equatable, CaseIterable {
       case any
-      case _2d = "2d"
-      case _3d = "3d"
+      case video2D = "2d"
+      case video3D = "3d"
     }
 
     /** Filter on the duration of the videos. */
@@ -228,6 +228,7 @@ public extension Search {
         /** Filter on videos of a specific type. */
         public var videoType: VideoType?
 
+        // swiftlint:disable:next function_body_length
         public init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], channelId: String? = nil, channelType: ChannelType? = nil, eventType: EventType? = nil, forContentOwner: Bool? = nil, forDeveloper: Bool? = nil, forMine: Bool? = nil, location: String? = nil, locationRadius: String? = nil, maxResults: Int? = nil, onBehalfOfContentOwner: String? = nil, order: Order? = nil, pageToken: String? = nil, publishedAfter: String? = nil, publishedBefore: String? = nil, q: String? = nil, regionCode: String? = nil, relatedToVideoId: String? = nil, relevanceLanguage: String? = nil, safeSearch: SafeSearch? = nil, topicId: String? = nil, type: [String]? = nil, videoCaption: VideoCaption? = nil, videoCategoryId: String? = nil, videoDefinition: VideoDefinition? = nil, videoDimension: VideoDimension? = nil, videoDuration: VideoDuration? = nil, videoEmbeddable: VideoEmbeddable? = nil, videoLicense: VideoLicense? = nil, videoSyndicated: VideoSyndicated? = nil, videoType: VideoType? = nil) {
           self.dollarXgafv = dollarXgafv
           self.accessToken = accessToken

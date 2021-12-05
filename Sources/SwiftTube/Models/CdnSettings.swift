@@ -5,8 +5,8 @@ import Prch
 public struct CdnSettings: Model {
   /** The frame rate of the inbound video data. */
   public enum FrameRate: String, Codable, Equatable, CaseIterable {
-    case _30fps = "30fps"
-    case _60fps = "60fps"
+    case fps30 = "30fps"
+    case fps60 = "60fps"
     case variable
   }
 
@@ -20,13 +20,13 @@ public struct CdnSettings: Model {
 
   /** The resolution of the inbound video data. */
   public enum Resolution: String, Codable, Equatable, CaseIterable {
-    case _240p = "240p"
-    case _360p = "360p"
-    case _480p = "480p"
-    case _720p = "720p"
-    case _1080p = "1080p"
-    case _1440p = "1440p"
-    case _2160p = "2160p"
+    case QVGA240p = "240p"
+    case SD360p = "360p"
+    case SD480p = "480p"
+    case HD720p = "720p"
+    case HD1080p = "1080p"
+    case QHD1440p = "1440p"
+    case HD4K2160p = "2160p"
     case variable
   }
 
