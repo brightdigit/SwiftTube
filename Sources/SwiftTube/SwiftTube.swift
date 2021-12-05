@@ -19,7 +19,7 @@ public enum YouTube {
   public enum Server {
     public static let main = "https://youtube.googleapis.com/"
   }
-  
+
   public struct API: Prch.API {
     public init(token: String? = nil) {
       headers = [
@@ -39,7 +39,6 @@ public enum YouTube {
     }()
   }
 }
-
 
 public enum AbuseReports {}
 public enum Activities {}
