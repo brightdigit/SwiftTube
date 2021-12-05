@@ -1,7 +1,7 @@
 import Foundation
 import Prch
 
-public extension Youtube {
+public extension YouTube {
   /** Updates an existing resource. */
   enum YoutubeYoutubeV3UpdateCommentThreads {
     public static let service = APIService<Response>(id: "youtube.youtube.v3.updateCommentThreads", tag: "youtube", method: "PUT", path: "/youtube/v3/commentThreads", hasBody: true, securityRequirements: [])

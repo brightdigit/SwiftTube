@@ -2,7 +2,7 @@ import Foundation
 import Prch
 
 /** The YouTube Data API v3 is an API that provides access to YouTube data, such as videos, playlists, and channels. */
-public enum SwiftTube {
+public enum YouTube {
   /// Whether to discard any errors when decoding optional properties
   public static var safeOptionalDecoding = false
 
@@ -19,7 +19,7 @@ public enum SwiftTube {
   public enum Server {
     public static let main = "https://youtube.googleapis.com/"
   }
-
+  
   public struct API: Prch.API {
     public init(token: String? = nil) {
       headers = [
@@ -28,17 +28,18 @@ public enum SwiftTube {
       ].compactMapValues { $0 }
     }
 
-    public let baseURL: URL = .init(staticString: SwiftTube.Server.main)
+    public let baseURL: URL = .init(staticString: YouTube.Server.main)
 
     public let headers: [String: String]
 
     public let decoder: ResponseDecoder = {
       let decoder = JSONDecoder()
-      decoder.dateDecodingStrategy = .formatted(SwiftTube.dateEncodingFormatter)
+      decoder.dateDecodingStrategy = .formatted(YouTube.dateEncodingFormatter)
       return decoder
     }()
   }
 }
+
 
 public enum AbuseReports {}
 public enum Activities {}
@@ -69,4 +70,3 @@ public enum VideoAbuseReportReasons {}
 public enum VideoCategories {}
 public enum Videos {}
 public enum Watermarks {}
-public enum Youtube {}
