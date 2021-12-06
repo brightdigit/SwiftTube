@@ -14,11 +14,11 @@ let package = Package(
     .library(name: "SwiftTube", targets: ["SwiftTube"])
   ],
   dependencies: [
-    .package(url: "https://github.com/shibapm/Komondor", from: "1.1.1"), // dev
-    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
-    .package(url: "https://github.com/realm/SwiftLint", from: "0.41.0"), // dev
-    .package(url: "https://github.com/shibapm/Rocket", from: "1.2.0"), // dev
-    .package(url: "https://github.com/brightdigit/swift-test-codecov", from: "1.0.0"), // dev
+//    .package(url: "https://github.com/shibapm/Komondor", from: "1.1.1"), // dev
+//    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
+//    .package(url: "https://github.com/realm/SwiftLint", from: "0.41.0"), // dev
+//    .package(url: "https://github.com/shibapm/Rocket", from: "1.2.0"), // dev
+//    .package(url: "https://github.com/brightdigit/swift-test-codecov", from: "1.0.0"), // dev
     .package(url: "https://github.com/brightdigit/Prch.git", from: "0.1.1")
   ],
   targets: [
