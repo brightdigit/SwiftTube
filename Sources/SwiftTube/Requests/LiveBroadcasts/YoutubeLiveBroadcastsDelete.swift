@@ -6,7 +6,7 @@ public extension LiveBroadcasts {
   enum YoutubeLiveBroadcastsDelete {
     public static let service = APIService<Response>(id: "youtube.liveBroadcasts.delete", tag: "liveBroadcasts", method: "DELETE", path: "/youtube/v3/liveBroadcasts", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -128,6 +128,8 @@ public extension LiveBroadcasts {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = Void
 
       /** Successful response */

@@ -6,7 +6,7 @@ public extension Comments {
   enum YoutubeCommentsInsert {
     public static let service = APIService<Response>(id: "youtube.comments.insert", tag: "comments", method: "POST", path: "/youtube/v3/comments", hasBody: true, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -119,6 +119,8 @@ public extension Comments {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = Comment
 
       /** Successful response */

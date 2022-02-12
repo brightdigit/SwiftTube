@@ -13,7 +13,7 @@ public extension Members {
       case allCurrent = "all_current"
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -156,6 +156,8 @@ public extension Members {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = MemberListResponse
 
       /** Successful response */
