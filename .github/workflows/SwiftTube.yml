@@ -2,7 +2,7 @@ name: SwiftTube
 on:
   push:
     branches:
-      - '*'
+      - 'pr/*'
       - 'feature/*'
       - 'release/*'
       - 'bugfix/*'
