@@ -6,7 +6,7 @@ public extension YouTube {
   enum YoutubeYoutubeV3UpdateCommentThreads {
     public static let service = APIService<Response>(id: "youtube.youtube.v3.updateCommentThreads", tag: "youtube", method: "PUT", path: "/youtube/v3/commentThreads", hasBody: true, securityRequirements: [])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -121,6 +121,8 @@ public extension YouTube {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = CommentThread
 
       /** Successful response */

@@ -6,7 +6,7 @@ public extension Channels {
   enum YoutubeChannelsList {
     public static let service = APIService<Response>(id: "youtube.channels.list", tag: "channels", method: "GET", path: "/youtube/v3/channels", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.readonly"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtubepartner"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtubepartner-channel-audit"])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -184,6 +184,8 @@ public extension Channels {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = ChannelListResponse
 
       /** Successful response */

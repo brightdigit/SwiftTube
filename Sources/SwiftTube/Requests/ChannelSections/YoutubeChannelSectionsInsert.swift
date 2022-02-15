@@ -6,7 +6,7 @@ public extension ChannelSections {
   enum YoutubeChannelSectionsInsert {
     public static let service = APIService<Response>(id: "youtube.channelSections.insert", tag: "channelSections", method: "POST", path: "/youtube/v3/channelSections", hasBody: true, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtubepartner"])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -133,6 +133,8 @@ public extension ChannelSections {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = ChannelSection
 
       /** Successful response */

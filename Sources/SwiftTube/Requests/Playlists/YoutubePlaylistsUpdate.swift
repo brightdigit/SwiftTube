@@ -6,7 +6,7 @@ public extension Playlists {
   enum YoutubePlaylistsUpdate {
     public static let service = APIService<Response>(id: "youtube.playlists.update", tag: "playlists", method: "PUT", path: "/youtube/v3/playlists", hasBody: true, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtubepartner"])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -126,6 +126,8 @@ public extension Playlists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = Playlist
 
       /** Successful response */

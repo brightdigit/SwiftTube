@@ -6,7 +6,7 @@ public extension MembershipsLevels {
   enum YoutubeMembershipsLevelsList {
     public static let service = APIService<Response>(id: "youtube.membershipsLevels.list", tag: "membershipsLevels", method: "GET", path: "/youtube/v3/membershipsLevels", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.channel-memberships.creator"])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -114,6 +114,8 @@ public extension MembershipsLevels {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = MembershipsLevelListResponse
 
       /** Successful response */
