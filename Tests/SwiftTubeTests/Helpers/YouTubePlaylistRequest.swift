@@ -2,8 +2,6 @@ import Prch
 import SwiftTube
 import XCTest
 
-// typealias YouTubeVideo = SwiftTube.Video
-
 struct YouTubePlaylistRequest {
   internal init(apiKey: String, playlistID: String) {
     self.apiKey = apiKey
