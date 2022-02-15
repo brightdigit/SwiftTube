@@ -6,7 +6,7 @@ public extension ThirdPartyLinks {
   enum YoutubeThirdPartyLinksUpdate {
     public static let service = APIService<Response>(id: "youtube.thirdPartyLinks.update", tag: "thirdPartyLinks", method: "PUT", path: "/youtube/v3/thirdPartyLinks", hasBody: true, securityRequirements: [])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -119,6 +119,8 @@ public extension ThirdPartyLinks {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = ThirdPartyLink
 
       /** Successful response */

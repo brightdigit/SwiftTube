@@ -6,7 +6,7 @@ public extension ChannelBanners {
   enum YoutubeChannelBannersInsert {
     public static let service = APIService<Response>(id: "youtube.channelBanners.insert", tag: "channelBanners", method: "POST", path: "/youtube/v3/channelBanners/insert", hasBody: true, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.upload"])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -130,6 +130,8 @@ public extension ChannelBanners {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias FailureType = Never
+      public typealias APIType = YouTube.API
       public typealias SuccessType = ChannelBannerResource
 
       /** Successful response */

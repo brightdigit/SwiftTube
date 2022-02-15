@@ -37,6 +37,12 @@ public enum YouTube {
       decoder.dateDecodingStrategy = .formatted(YouTube.dateEncodingFormatter)
       return decoder
     }()
+
+    public var encoder: RequestEncoder = {
+      let encoder = JSONEncoder()
+      encoder.dateEncodingStrategy = .formatted(YouTube.dateEncodingFormatter)
+      return encoder
+    }()
   }
 }
 
