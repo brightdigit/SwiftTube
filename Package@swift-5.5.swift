@@ -22,7 +22,8 @@ let package = Package(
     .package(url: "https://github.com/brightdigit/Prch.git", from: "0.2.0-beta.1")
   ],
   targets: [
-    .target(name: "SwiftTube", dependencies: ["Prch"])
+    .target(name: "SwiftTube", dependencies: ["Prch"]),
+    .testTarget(name: "SwiftTubeTests", dependencies: ["SwiftTube"])
   ]
 )
 
