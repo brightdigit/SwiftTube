@@ -48,6 +48,7 @@ let package = Package(
     ],
     "komondor": [
       "pre-commit": [
+        "swift test --generate-linuxmain",
         "swift run swiftformat .",
         "swift run swiftlint autocorrect",
         "git add .",
