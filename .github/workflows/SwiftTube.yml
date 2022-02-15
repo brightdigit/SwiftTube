@@ -7,6 +7,9 @@ on:
       - 'release/*'
       - 'bugfix/*'
     tags: '*'
+env:
+  YOUTUBE_API_KEY:  ${{ secrets.YOUTUBE_API_KEY }}
+  YOUTUBE_PLAYLIST_ID:  ${{ secrets.YOUTUBE_PLAYLIST_ID }}
 jobs:
   build-ubuntu:
     name: Build on Ubuntu
@@ -35,14 +38,8 @@ jobs:
         run: echo "$GITHUB_WORKSPACE/swift-${SWIFT_VER}-RELEASE-ubuntu${RELEASE_DOT}/usr/bin" >> $GITHUB_PATH
       - name: Build
         run: swift build
-      # - name: Run tests
-      #   run: swift test --enable-test-discovery --enable-code-coverage
-      # - name: Prepare Code Coverage
-      #   run: llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/${{ env.PACKAGE_NAME }}PackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov
-      # - name: Upload to CodeCov.io
-      #   run: bash <(curl https://codecov.io/bash) -F github -F ${RELEASE_NAME} -F ${SWIFT_VER}
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Run tests
+        run: swift test
   build-macos:
     name: Build on macOS
     env:
@@ -74,20 +71,11 @@ jobs:
         run: sudo xcode-select -s ${{ matrix.xcode }}/Contents/Developer
       - name: Build
         run: swift build
-      # - name: Lint
-      #   if: startsWith(github.ref, 'refs/tags/') != true
-      #   run: swift run swiftformat --lint . && swift run swiftlint
-      # - name: Run tests
-      #   run: swift test -v --enable-code-coverage
-      # - name: Prepare Code Coverage
-      #   run: xcrun llvm-cov export -format="lcov" .build/debug/${{ env.PACKAGE_NAME }}PackageTests.xctest/Contents/MacOS/${{ env.PACKAGE_NAME }}PackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
-      # - name: Upload to CodeCov.io
-      #   run: bash <(curl https://codecov.io/bash) -F github -F macOS -F ${{ matrix.runs-on }}
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Build sourcedocs Documentation
-        if: ${{ matrix.os == 'macos-11' && matrix.xcode == '/Applications/Xcode_13.0.app' && !startsWith(github.ref, 'refs/tags/') }}
-        run: "swift run sourcedocs generate build -cra\ngit config --local user.email \"action@github.com\"\ngit config --local user.name \"GitHub Action\"\ngit status\ngit add Documentation\ngit diff-index --quiet HEAD || git commit -m \"[github action] Update Docs\"\ngit push    \n"
+      - name: Lint
+        if: startsWith(github.ref, 'refs/tags/') != true
+        run: swift run swiftformat --lint . && swift run swiftlint
+      - name: Run tests
+        run: swift test
   deploy:
     name: Deploy to Netlify
     needs: [build-macos, build-ubuntu]
