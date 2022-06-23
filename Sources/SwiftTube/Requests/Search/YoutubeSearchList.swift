@@ -4,7 +4,7 @@ import Prch
 public extension Search {
   /** Retrieves a list of search resources */
   enum YoutubeSearchList {
-    public static let service = APIService<Response>(id: "youtube.search.list", tag: "search", method: "GET", path: "/youtube/v3/search", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.readonly"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtubepartner"])])
+    public static let service = Service<Response>(id: "youtube.search.list", tag: "search", method: "GET", path: "/youtube/v3/search", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.readonly"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtubepartner"])])
 
     /** Add a filter on the channel search. */
     public enum ChannelType: String, Codable, Equatable, CaseIterable {
@@ -100,7 +100,7 @@ public extension Search {
       case episode
     }
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -418,7 +418,7 @@ public extension Search {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = SearchListResponse
@@ -453,7 +453,7 @@ public extension Search {
       public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = try .status200(decoder.decode(SearchListResponse.self, from: data))
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

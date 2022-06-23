@@ -4,9 +4,9 @@ import Prch
 public extension Comments {
   /** Expresses the caller's opinion that one or more comments should be flagged as spam. */
   enum YoutubeCommentsMarkAsSpam {
-    public static let service = APIService<Response>(id: "youtube.comments.markAsSpam", tag: "comments", method: "POST", path: "/youtube/v3/comments/markAsSpam", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
+    public static let service = Service<Response>(id: "youtube.comments.markAsSpam", tag: "comments", method: "POST", path: "/youtube/v3/comments/markAsSpam", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -113,7 +113,7 @@ public extension Comments {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = Void
@@ -148,7 +148,7 @@ public extension Comments {
       public init(statusCode: Int, data: Data, decoder _: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = .status200
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

@@ -45,7 +45,7 @@ public struct CommentSnippet: Model {
   public var parentId: String?
 
   /** The date and time when the comment was originally published. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** The comment's text. The format is either plain text or HTML dependent on what has been requested. Even the plain text representation may differ from the text originally posted in that it may replace video links with video titles etc. */
   public var textDisplay: String?
@@ -54,7 +54,7 @@ public struct CommentSnippet: Model {
   public var textOriginal: String?
 
   /** The date and time when the comment was last updated. */
-  public var updatedAt: DateTime?
+  public var updatedAt: Date?
 
   /** The ID of the video the comment refers to, if any. */
   public var videoId: String?
@@ -62,7 +62,7 @@ public struct CommentSnippet: Model {
   /** The rating the viewer has given to this comment. For the time being this will never return RATE_TYPE_DISLIKE and instead return RATE_TYPE_NONE. This may change in the future. */
   public var viewerRating: ViewerRating?
 
-  public init(authorChannelId: CommentSnippetAuthorChannelId? = nil, authorChannelUrl: String? = nil, authorDisplayName: String? = nil, authorProfileImageUrl: String? = nil, canRate: Bool? = nil, channelId: String? = nil, likeCount: Int? = nil, moderationStatus: ModerationStatus? = nil, parentId: String? = nil, publishedAt: DateTime? = nil, textDisplay: String? = nil, textOriginal: String? = nil, updatedAt: DateTime? = nil, videoId: String? = nil, viewerRating: ViewerRating? = nil) {
+  public init(authorChannelId: CommentSnippetAuthorChannelId? = nil, authorChannelUrl: String? = nil, authorDisplayName: String? = nil, authorProfileImageUrl: String? = nil, canRate: Bool? = nil, channelId: String? = nil, likeCount: Int? = nil, moderationStatus: ModerationStatus? = nil, parentId: String? = nil, publishedAt: Date? = nil, textDisplay: String? = nil, textOriginal: String? = nil, updatedAt: Date? = nil, videoId: String? = nil, viewerRating: ViewerRating? = nil) {
     self.authorChannelId = authorChannelId
     self.authorChannelUrl = authorChannelUrl
     self.authorDisplayName = authorDisplayName

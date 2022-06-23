@@ -7,21 +7,21 @@ public struct VideoLiveStreamingDetails: Model {
   public var activeLiveChatId: String?
 
   /** The time that the broadcast actually ended. This value will not be available until the broadcast is over. */
-  public var actualEndTime: DateTime?
+  public var actualEndTime: Date?
 
   /** The time that the broadcast actually started. This value will not be available until the broadcast begins. */
-  public var actualStartTime: DateTime?
+  public var actualStartTime: Date?
 
   /** The number of viewers currently watching the broadcast. The property and its value will be present if the broadcast has current viewers and the broadcast owner has not hidden the viewcount for the video. Note that YouTube stops tracking the number of concurrent viewers for a broadcast when the broadcast ends. So, this property would not identify the number of viewers watching an archived video of a live broadcast that already ended. */
   public var concurrentViewers: String?
 
   /** The time that the broadcast is scheduled to end. If the value is empty or the property is not present, then the broadcast is scheduled to contiue indefinitely. */
-  public var scheduledEndTime: DateTime?
+  public var scheduledEndTime: Date?
 
   /** The time that the broadcast is scheduled to begin. */
-  public var scheduledStartTime: DateTime?
+  public var scheduledStartTime: Date?
 
-  public init(activeLiveChatId: String? = nil, actualEndTime: DateTime? = nil, actualStartTime: DateTime? = nil, concurrentViewers: String? = nil, scheduledEndTime: DateTime? = nil, scheduledStartTime: DateTime? = nil) {
+  public init(activeLiveChatId: String? = nil, actualEndTime: Date? = nil, actualStartTime: Date? = nil, concurrentViewers: String? = nil, scheduledEndTime: Date? = nil, scheduledStartTime: Date? = nil) {
     self.activeLiveChatId = activeLiveChatId
     self.actualEndTime = actualEndTime
     self.actualStartTime = actualStartTime

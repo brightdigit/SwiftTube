@@ -11,12 +11,12 @@ public struct LiveStreamSnippet: Model {
   public var isDefaultStream: Bool?
 
   /** The date and time that the stream was created. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** The stream's title. The value must be between 1 and 128 characters long. */
   public var title: String?
 
-  public init(channelId: String? = nil, description: String? = nil, isDefaultStream: Bool? = nil, publishedAt: DateTime? = nil, title: String? = nil) {
+  public init(channelId: String? = nil, description: String? = nil, isDefaultStream: Bool? = nil, publishedAt: Date? = nil, title: String? = nil) {
     self.channelId = channelId
     self.description = description
     self.isDefaultStream = isDefaultStream

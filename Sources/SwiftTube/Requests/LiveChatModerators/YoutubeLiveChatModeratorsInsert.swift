@@ -4,9 +4,9 @@ import Prch
 public extension LiveChatModerators {
   /** Inserts a new resource into this collection. */
   enum YoutubeLiveChatModeratorsInsert {
-    public static let service = APIService<Response>(id: "youtube.liveChatModerators.insert", tag: "liveChatModerators", method: "POST", path: "/youtube/v3/liveChat/moderators", hasBody: true, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
+    public static let service = Service<Response>(id: "youtube.liveChatModerators.insert", tag: "liveChatModerators", method: "POST", path: "/youtube/v3/liveChat/moderators", hasBody: true, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -118,7 +118,7 @@ public extension LiveChatModerators {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = LiveChatModerator
@@ -153,7 +153,7 @@ public extension LiveChatModerators {
       public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = try .status200(decoder.decode(LiveChatModerator.self, from: data))
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

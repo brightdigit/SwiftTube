@@ -4,9 +4,9 @@ import Prch
 public extension MembershipsLevels {
   /** Retrieves a list of all pricing levels offered by a creator to the fans. */
   enum YoutubeMembershipsLevelsList {
-    public static let service = APIService<Response>(id: "youtube.membershipsLevels.list", tag: "membershipsLevels", method: "GET", path: "/youtube/v3/membershipsLevels", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.channel-memberships.creator"])])
+    public static let service = Service<Response>(id: "youtube.membershipsLevels.list", tag: "membershipsLevels", method: "GET", path: "/youtube/v3/membershipsLevels", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.channel-memberships.creator"])])
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -113,7 +113,7 @@ public extension MembershipsLevels {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = MembershipsLevelListResponse
@@ -148,7 +148,7 @@ public extension MembershipsLevels {
       public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = try .status200(decoder.decode(MembershipsLevelListResponse.self, from: data))
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

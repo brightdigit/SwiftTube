@@ -4,7 +4,7 @@ import Prch
 public extension Comments {
   /** Sets the moderation status of one or more comments. */
   enum YoutubeCommentsSetModerationStatus {
-    public static let service = APIService<Response>(id: "youtube.comments.setModerationStatus", tag: "comments", method: "POST", path: "/youtube/v3/comments/setModerationStatus", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
+    public static let service = Service<Response>(id: "youtube.comments.setModerationStatus", tag: "comments", method: "POST", path: "/youtube/v3/comments/setModerationStatus", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
 
     /** Specifies the requested moderation status. Note, comments can be in statuses, which are not available through this call. For example, this call does not allow to mark a comment as 'likely spam'. Valid values: MODERATION_STATUS_PUBLISHED, MODERATION_STATUS_HELD_FOR_REVIEW, MODERATION_STATUS_REJECTED. */
     public enum ModerationStatus: String, Codable, Equatable, CaseIterable {
@@ -14,7 +14,7 @@ public extension Comments {
       case rejected
     }
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -133,7 +133,7 @@ public extension Comments {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = Void
@@ -168,7 +168,7 @@ public extension Comments {
       public init(statusCode: Int, data: Data, decoder _: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = .status200
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

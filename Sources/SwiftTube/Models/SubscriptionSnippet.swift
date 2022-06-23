@@ -13,7 +13,7 @@ public struct SubscriptionSnippet: Model {
   public var description: String?
 
   /** The date and time that the subscription was created. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** The id object contains information about the channel that the user subscribed to. */
   public var resourceId: ResourceId?
@@ -24,7 +24,7 @@ public struct SubscriptionSnippet: Model {
   /** The subscription's title. */
   public var title: String?
 
-  public init(channelId: String? = nil, channelTitle: String? = nil, description: String? = nil, publishedAt: DateTime? = nil, resourceId: ResourceId? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil) {
+  public init(channelId: String? = nil, channelTitle: String? = nil, description: String? = nil, publishedAt: Date? = nil, resourceId: ResourceId? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil) {
     self.channelId = channelId
     self.channelTitle = channelTitle
     self.description = description

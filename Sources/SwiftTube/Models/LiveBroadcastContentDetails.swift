@@ -39,7 +39,7 @@ public struct LiveBroadcastContentDetails: Model {
   public var boundStreamId: String?
 
   /** The date and time that the live stream referenced by boundStreamId was last updated. */
-  public var boundStreamLastUpdateTimeMs: DateTime?
+  public var boundStreamLastUpDateMs: Date?
 
   public var closedCaptionsType: ClosedCaptionsType?
 
@@ -85,9 +85,9 @@ public struct LiveBroadcastContentDetails: Model {
   /** The 3D stereo layout of this broadcast. This defaults to mono. */
   public var stereoLayout: StereoLayout?
 
-  public init(boundStreamId: String? = nil, boundStreamLastUpdateTimeMs: DateTime? = nil, closedCaptionsType: ClosedCaptionsType? = nil, enableAutoStart: Bool? = nil, enableAutoStop: Bool? = nil, enableClosedCaptions: Bool? = nil, enableContentEncryption: Bool? = nil, enableDvr: Bool? = nil, enableEmbed: Bool? = nil, enableLowLatency: Bool? = nil, latencyPreference: LatencyPreference? = nil, mesh: File? = nil, monitorStream: MonitorStreamInfo? = nil, projection: Projection? = nil, recordFromStart: Bool? = nil, startWithSlate: Bool? = nil, stereoLayout: StereoLayout? = nil) {
+  public init(boundStreamId: String? = nil, boundStreamLastUpDateMs: Date? = nil, closedCaptionsType: ClosedCaptionsType? = nil, enableAutoStart: Bool? = nil, enableAutoStop: Bool? = nil, enableClosedCaptions: Bool? = nil, enableContentEncryption: Bool? = nil, enableDvr: Bool? = nil, enableEmbed: Bool? = nil, enableLowLatency: Bool? = nil, latencyPreference: LatencyPreference? = nil, mesh: File? = nil, monitorStream: MonitorStreamInfo? = nil, projection: Projection? = nil, recordFromStart: Bool? = nil, startWithSlate: Bool? = nil, stereoLayout: StereoLayout? = nil) {
     self.boundStreamId = boundStreamId
-    self.boundStreamLastUpdateTimeMs = boundStreamLastUpdateTimeMs
+    self.boundStreamLastUpDateMs = boundStreamLastUpDateMs
     self.closedCaptionsType = closedCaptionsType
     self.enableAutoStart = enableAutoStart
     self.enableAutoStop = enableAutoStop
@@ -109,7 +109,7 @@ public struct LiveBroadcastContentDetails: Model {
     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
     boundStreamId = try container.decodeIfPresent("boundStreamId")
-    boundStreamLastUpdateTimeMs = try container.decodeIfPresent("boundStreamLastUpdateTimeMs")
+    boundStreamLastUpDateMs = try container.decodeIfPresent("boundStreamLastUpDateMs")
     closedCaptionsType = try container.decodeIfPresent("closedCaptionsType")
     enableAutoStart = try container.decodeIfPresent("enableAutoStart")
     enableAutoStop = try container.decodeIfPresent("enableAutoStop")
@@ -131,7 +131,7 @@ public struct LiveBroadcastContentDetails: Model {
     var container = encoder.container(keyedBy: StringCodingKey.self)
 
     try container.encodeIfPresent(boundStreamId, forKey: "boundStreamId")
-    try container.encodeIfPresent(boundStreamLastUpdateTimeMs, forKey: "boundStreamLastUpdateTimeMs")
+    try container.encodeIfPresent(boundStreamLastUpDateMs, forKey: "boundStreamLastUpDateMs")
     try container.encodeIfPresent(closedCaptionsType, forKey: "closedCaptionsType")
     try container.encodeIfPresent(enableAutoStart, forKey: "enableAutoStart")
     try container.encodeIfPresent(enableAutoStop, forKey: "enableAutoStop")

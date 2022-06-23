@@ -16,7 +16,7 @@ public struct LiveChatMessageListResponse: Model {
   public var nextPageToken: String?
 
   /** The date and time when the underlying stream went offline. */
-  public var offlineAt: DateTime?
+  public var offlineAt: Date?
 
   /** General pagination information. */
   public var pageInfo: PageInfo?
@@ -29,7 +29,7 @@ public struct LiveChatMessageListResponse: Model {
   /** The visitorId identifies the visitor. */
   public var visitorId: String?
 
-  public init(etag: String? = nil, eventId: String? = nil, items: [LiveChatMessage]? = nil, kind: String? = nil, nextPageToken: String? = nil, offlineAt: DateTime? = nil, pageInfo: PageInfo? = nil, pollingIntervalMillis: Int? = nil, tokenPagination: TokenPagination? = nil, visitorId: String? = nil) {
+  public init(etag: String? = nil, eventId: String? = nil, items: [LiveChatMessage]? = nil, kind: String? = nil, nextPageToken: String? = nil, offlineAt: Date? = nil, pageInfo: PageInfo? = nil, pollingIntervalMillis: Int? = nil, tokenPagination: TokenPagination? = nil, visitorId: String? = nil) {
     self.etag = etag
     self.eventId = eventId
     self.items = items
