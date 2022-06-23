@@ -67,7 +67,7 @@ public struct VideoStatus: Model {
   public var publicStatsViewable: Bool?
 
   /** The date and time when the video is scheduled to publish. It can be set only if the privacy status of the video is private.. */
-  public var publishAt: DateTime?
+  public var publishAt: Date?
 
   /** This value explains why YouTube rejected an uploaded video. This property is only present if the uploadStatus property indicates that the upload was rejected. */
   public var rejectionReason: RejectionReason?
@@ -77,7 +77,7 @@ public struct VideoStatus: Model {
   /** The status of the uploaded video. */
   public var uploadStatus: UploadStatus?
 
-  public init(embeddable: Bool? = nil, failureReason: FailureReason? = nil, license: License? = nil, madeForKids: Bool? = nil, privacyStatus: PrivacyStatus? = nil, publicStatsViewable: Bool? = nil, publishAt: DateTime? = nil, rejectionReason: RejectionReason? = nil, selfDeclaredMadeForKids: Bool? = nil, uploadStatus: UploadStatus? = nil) {
+  public init(embeddable: Bool? = nil, failureReason: FailureReason? = nil, license: License? = nil, madeForKids: Bool? = nil, privacyStatus: PrivacyStatus? = nil, publicStatsViewable: Bool? = nil, publishAt: Date? = nil, rejectionReason: RejectionReason? = nil, selfDeclaredMadeForKids: Bool? = nil, uploadStatus: UploadStatus? = nil) {
     self.embeddable = embeddable
     self.failureReason = failureReason
     self.license = license

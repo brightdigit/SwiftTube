@@ -32,7 +32,7 @@ public struct ActivitySnippet: Model {
   public var groupId: String?
 
   /** The date and time that the video was uploaded. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** A map of thumbnail images associated with the resource that is primarily associated with the activity. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail. */
   public var thumbnails: ThumbnailDetails?
@@ -43,7 +43,7 @@ public struct ActivitySnippet: Model {
   /** The type of activity that the resource describes. */
   public var type: `Type`?
 
-  public init(channelId: String? = nil, channelTitle: String? = nil, description: String? = nil, groupId: String? = nil, publishedAt: DateTime? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil, type: Type? = nil) {
+  public init(channelId: String? = nil, channelTitle: String? = nil, description: String? = nil, groupId: String? = nil, publishedAt: Date? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil, type: Type? = nil) {
     self.channelId = channelId
     self.channelTitle = channelTitle
     self.description = description

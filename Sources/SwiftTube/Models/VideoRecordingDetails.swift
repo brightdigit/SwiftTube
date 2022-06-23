@@ -10,9 +10,9 @@ public struct VideoRecordingDetails: Model {
   public var locationDescription: String?
 
   /** The date and time when the video was recorded. */
-  public var recordingDate: DateTime?
+  public var recordingDate: Date?
 
-  public init(location: GeoPoint? = nil, locationDescription: String? = nil, recordingDate: DateTime? = nil) {
+  public init(location: GeoPoint? = nil, locationDescription: String? = nil, recordingDate: Date? = nil) {
     self.location = location
     self.locationDescription = locationDescription
     self.recordingDate = recordingDate

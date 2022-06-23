@@ -12,7 +12,7 @@ public struct SuperChatEventSnippet: Model {
   public var commentText: String?
 
   /** The date and time when the event occurred. */
-  public var createdAt: DateTime?
+  public var createdAt: Date?
 
   /** The currency in which the purchase was made. ISO 4217. */
   public var currency: String?
@@ -32,7 +32,7 @@ public struct SuperChatEventSnippet: Model {
   /** Details about the supporter. */
   public var supporterDetails: ChannelProfileDetails?
 
-  public init(amountMicros: String? = nil, channelId: String? = nil, commentText: String? = nil, createdAt: DateTime? = nil, currency: String? = nil, displayString: String? = nil, isSuperStickerEvent: Bool? = nil, messageType: Int? = nil, superStickerMetadata: SuperStickerMetadata? = nil, supporterDetails: ChannelProfileDetails? = nil) {
+  public init(amountMicros: String? = nil, channelId: String? = nil, commentText: String? = nil, createdAt: Date? = nil, currency: String? = nil, displayString: String? = nil, isSuperStickerEvent: Bool? = nil, messageType: Int? = nil, superStickerMetadata: SuperStickerMetadata? = nil, supporterDetails: ChannelProfileDetails? = nil) {
     self.amountMicros = amountMicros
     self.channelId = channelId
     self.commentText = commentText

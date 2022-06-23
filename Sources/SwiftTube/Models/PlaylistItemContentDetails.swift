@@ -15,9 +15,9 @@ public struct PlaylistItemContentDetails: Model {
   public var videoId: String?
 
   /** The date and time that the video was published to YouTube. */
-  public var videoPublishedAt: DateTime?
+  public var videoPublishedAt: Date?
 
-  public init(endAt: String? = nil, note: String? = nil, startAt: String? = nil, videoId: String? = nil, videoPublishedAt: DateTime? = nil) {
+  public init(endAt: String? = nil, note: String? = nil, startAt: String? = nil, videoId: String? = nil, videoPublishedAt: Date? = nil) {
     self.endAt = endAt
     self.note = note
     self.startAt = startAt

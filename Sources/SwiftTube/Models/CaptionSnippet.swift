@@ -57,7 +57,7 @@ public struct CaptionSnippet: Model {
   public var language: String?
 
   /** The date and time when the caption track was last updated. */
-  public var lastUpdated: DateTime?
+  public var lastUpdated: Date?
 
   /** The name of the caption track. The name is intended to be visible to the user as an option during playback. */
   public var name: String?
@@ -71,7 +71,7 @@ public struct CaptionSnippet: Model {
   /** The ID that YouTube uses to uniquely identify the video associated with the caption track. @mutable youtube.captions.insert */
   public var videoId: String?
 
-  public init(audioTrackType: AudioTrackType? = nil, failureReason: FailureReason? = nil, isAutoSynced: Bool? = nil, isCC: Bool? = nil, isDraft: Bool? = nil, isEasyReader: Bool? = nil, isLarge: Bool? = nil, language: String? = nil, lastUpdated: DateTime? = nil, name: String? = nil, status: Status? = nil, trackKind: TrackKind? = nil, videoId: String? = nil) {
+  public init(audioTrackType: AudioTrackType? = nil, failureReason: FailureReason? = nil, isAutoSynced: Bool? = nil, isCC: Bool? = nil, isDraft: Bool? = nil, isEasyReader: Bool? = nil, isLarge: Bool? = nil, language: String? = nil, lastUpdated: Date? = nil, name: String? = nil, status: Status? = nil, trackKind: TrackKind? = nil, videoId: String? = nil) {
     self.audioTrackType = audioTrackType
     self.failureReason = failureReason
     self.isAutoSynced = isAutoSynced

@@ -15,14 +15,14 @@ public struct LiveStreamHealthStatus: Model {
   public var configurationIssues: [LiveStreamConfigurationIssue]?
 
   /** The last time this status was updated (in seconds) */
-  public var lastUpdateTimeSeconds: String?
+  public var lastUpDateSeconds: String?
 
   /** The status code of this stream */
   public var status: Status?
 
-  public init(configurationIssues: [LiveStreamConfigurationIssue]? = nil, lastUpdateTimeSeconds: String? = nil, status: Status? = nil) {
+  public init(configurationIssues: [LiveStreamConfigurationIssue]? = nil, lastUpDateSeconds: String? = nil, status: Status? = nil) {
     self.configurationIssues = configurationIssues
-    self.lastUpdateTimeSeconds = lastUpdateTimeSeconds
+    self.lastUpDateSeconds = lastUpDateSeconds
     self.status = status
   }
 
@@ -30,7 +30,7 @@ public struct LiveStreamHealthStatus: Model {
     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
     configurationIssues = try container.decodeArrayIfPresent("configurationIssues")
-    lastUpdateTimeSeconds = try container.decodeIfPresent("lastUpdateTimeSeconds")
+    lastUpDateSeconds = try container.decodeIfPresent("lastUpDateSeconds")
     status = try container.decodeIfPresent("status")
   }
 
@@ -38,7 +38,7 @@ public struct LiveStreamHealthStatus: Model {
     var container = encoder.container(keyedBy: StringCodingKey.self)
 
     try container.encodeIfPresent(configurationIssues, forKey: "configurationIssues")
-    try container.encodeIfPresent(lastUpdateTimeSeconds, forKey: "lastUpdateTimeSeconds")
+    try container.encodeIfPresent(lastUpDateSeconds, forKey: "lastUpDateSeconds")
     try container.encodeIfPresent(status, forKey: "status")
   }
 }

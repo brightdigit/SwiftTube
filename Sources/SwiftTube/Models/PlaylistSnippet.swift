@@ -19,7 +19,7 @@ public struct PlaylistSnippet: Model {
   public var localized: PlaylistLocalization?
 
   /** The date and time that the playlist was created. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** Keyword tags associated with the playlist. */
   public var tags: [String]?
@@ -33,7 +33,7 @@ public struct PlaylistSnippet: Model {
   /** The playlist's title. */
   public var title: String?
 
-  public init(channelId: String? = nil, channelTitle: String? = nil, defaultLanguage: String? = nil, description: String? = nil, localized: PlaylistLocalization? = nil, publishedAt: DateTime? = nil, tags: [String]? = nil, thumbnailVideoId: String? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil) {
+  public init(channelId: String? = nil, channelTitle: String? = nil, defaultLanguage: String? = nil, description: String? = nil, localized: PlaylistLocalization? = nil, publishedAt: Date? = nil, tags: [String]? = nil, thumbnailVideoId: String? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil) {
     self.channelId = channelId
     self.channelTitle = channelTitle
     self.defaultLanguage = defaultLanguage
