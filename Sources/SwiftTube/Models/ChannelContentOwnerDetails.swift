@@ -7,9 +7,9 @@ public struct ChannelContentOwnerDetails: Model {
   public var contentOwner: String?
 
   /** The date and time when the channel was linked to the content owner. */
-  public var timeLinked: DateTime?
+  public var timeLinked: Date?
 
-  public init(contentOwner: String? = nil, timeLinked: DateTime? = nil) {
+  public init(contentOwner: String? = nil, timeLinked: Date? = nil) {
     self.contentOwner = contentOwner
     self.timeLinked = timeLinked
   }

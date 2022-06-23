@@ -4,9 +4,9 @@ import Prch
 public extension ChannelSections {
   /** Retrieves a list of resources, possibly filtered. */
   enum YoutubeChannelSectionsList {
-    public static let service = APIService<Response>(id: "youtube.channelSections.list", tag: "channelSections", method: "GET", path: "/youtube/v3/channelSections", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.readonly"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtubepartner"])])
+    public static let service = Service<Response>(id: "youtube.channelSections.list", tag: "channelSections", method: "GET", path: "/youtube/v3/channelSections", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.readonly"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtubepartner"])])
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -148,7 +148,7 @@ public extension ChannelSections {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = ChannelSectionListResponse
@@ -183,7 +183,7 @@ public extension ChannelSections {
       public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = try .status200(decoder.decode(ChannelSectionListResponse.self, from: data))
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

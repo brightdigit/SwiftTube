@@ -24,7 +24,7 @@ public struct SearchResultSnippet: Model {
   public var liveBroadcastContent: LiveBroadcastContent?
 
   /** The creation date and time of the resource that the search result identifies. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** A map of thumbnail images associated with the search result. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail. */
   public var thumbnails: ThumbnailDetails?
@@ -32,7 +32,7 @@ public struct SearchResultSnippet: Model {
   /** The title of the search result. */
   public var title: String?
 
-  public init(channelId: String? = nil, channelTitle: String? = nil, description: String? = nil, liveBroadcastContent: LiveBroadcastContent? = nil, publishedAt: DateTime? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil) {
+  public init(channelId: String? = nil, channelTitle: String? = nil, description: String? = nil, liveBroadcastContent: LiveBroadcastContent? = nil, publishedAt: Date? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil) {
     self.channelId = channelId
     self.channelTitle = channelTitle
     self.description = description

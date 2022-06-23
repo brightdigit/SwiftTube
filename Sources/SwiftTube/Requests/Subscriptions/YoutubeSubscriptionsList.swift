@@ -4,7 +4,7 @@ import Prch
 public extension Subscriptions {
   /** Retrieves a list of resources, possibly filtered. */
   enum YoutubeSubscriptionsList {
-    public static let service = APIService<Response>(id: "youtube.subscriptions.list", tag: "subscriptions", method: "GET", path: "/youtube/v3/subscriptions", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.readonly"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtubepartner"])])
+    public static let service = Service<Response>(id: "youtube.subscriptions.list", tag: "subscriptions", method: "GET", path: "/youtube/v3/subscriptions", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.readonly"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtubepartner"])])
 
     /** The order of the returned subscriptions */
     public enum Order: String, Codable, Equatable, CaseIterable {
@@ -14,7 +14,7 @@ public extension Subscriptions {
       case alphabetical
     }
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -197,7 +197,7 @@ public extension Subscriptions {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = SubscriptionListResponse
@@ -232,7 +232,7 @@ public extension Subscriptions {
       public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = try .status200(decoder.decode(SubscriptionListResponse.self, from: data))
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

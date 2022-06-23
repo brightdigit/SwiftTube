@@ -4,7 +4,7 @@ import Prch
 public extension ThirdPartyLinks {
   /** Deletes a resource. */
   enum YoutubeThirdPartyLinksDelete {
-    public static let service = APIService<Response>(id: "youtube.thirdPartyLinks.delete", tag: "thirdPartyLinks", method: "DELETE", path: "/youtube/v3/thirdPartyLinks", hasBody: false, securityRequirements: [])
+    public static let service = Service<Response>(id: "youtube.thirdPartyLinks.delete", tag: "thirdPartyLinks", method: "DELETE", path: "/youtube/v3/thirdPartyLinks", hasBody: false, securityRequirements: [])
 
     /** Type of the link to be deleted. */
     public enum `Type`: String, Codable, Equatable, CaseIterable {
@@ -12,7 +12,7 @@ public extension ThirdPartyLinks {
       case channelToStoreLink
     }
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -131,7 +131,7 @@ public extension ThirdPartyLinks {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = Void
@@ -166,7 +166,7 @@ public extension ThirdPartyLinks {
       public init(statusCode: Int, data: Data, decoder _: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = .status200
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

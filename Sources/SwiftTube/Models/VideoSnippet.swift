@@ -36,7 +36,7 @@ public struct VideoSnippet: Model {
   public var localized: VideoLocalization?
 
   /** The date and time when the video was uploaded. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** A list of keyword tags associated with the video. Tags may contain spaces. */
   public var tags: [String]?
@@ -47,7 +47,7 @@ public struct VideoSnippet: Model {
   /** The video's title. @mutable youtube.videos.insert youtube.videos.update */
   public var title: String?
 
-  public init(categoryId: String? = nil, channelId: String? = nil, channelTitle: String? = nil, defaultAudioLanguage: String? = nil, defaultLanguage: String? = nil, description: String? = nil, liveBroadcastContent: LiveBroadcastContent? = nil, localized: VideoLocalization? = nil, publishedAt: DateTime? = nil, tags: [String]? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil) {
+  public init(categoryId: String? = nil, channelId: String? = nil, channelTitle: String? = nil, defaultAudioLanguage: String? = nil, defaultLanguage: String? = nil, description: String? = nil, liveBroadcastContent: LiveBroadcastContent? = nil, localized: VideoLocalization? = nil, publishedAt: Date? = nil, tags: [String]? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil) {
     self.categoryId = categoryId
     self.channelId = channelId
     self.channelTitle = channelTitle

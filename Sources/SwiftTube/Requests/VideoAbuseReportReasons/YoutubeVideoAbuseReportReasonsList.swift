@@ -4,9 +4,9 @@ import Prch
 public extension VideoAbuseReportReasons {
   /** Retrieves a list of resources, possibly filtered. */
   enum YoutubeVideoAbuseReportReasonsList {
-    public static let service = APIService<Response>(id: "youtube.videoAbuseReportReasons.list", tag: "videoAbuseReportReasons", method: "GET", path: "/youtube/v3/videoAbuseReportReasons", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.readonly"])])
+    public static let service = Service<Response>(id: "youtube.videoAbuseReportReasons.list", tag: "videoAbuseReportReasons", method: "GET", path: "/youtube/v3/videoAbuseReportReasons", hasBody: false, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"]), SecurityRequirement(type: "Oauth2c", scopes: ["https://www.googleapis.com/auth/youtube.readonly"])])
 
-    public final class Request: APIRequest<Response, YouTube.API> {
+    public final class Request: DeprecatedRequest<Response, YouTube.API> {
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -119,7 +119,7 @@ public extension VideoAbuseReportReasons {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = VideoAbuseReportReasonListResponse
@@ -154,7 +154,7 @@ public extension VideoAbuseReportReasons {
       public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
         switch statusCode {
         case 200: self = try .status200(decoder.decode(VideoAbuseReportReasonListResponse.self, from: data))
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        default: throw ClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
         }
       }
 

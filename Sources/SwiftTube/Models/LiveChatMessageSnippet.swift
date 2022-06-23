@@ -46,7 +46,7 @@ public struct LiveChatMessageSnippet: Model {
   public var newSponsorDetails: LiveChatNewSponsorDetails?
 
   /** The date and time when the message was orignally published. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** Details about the Super Chat event, this is only set if the type is 'superChatEvent'. */
   public var superChatDetails: LiveChatSuperChatDetails?
@@ -62,7 +62,7 @@ public struct LiveChatMessageSnippet: Model {
 
   public var userBannedDetails: LiveChatUserBannedMessageDetails?
 
-  public init(authorChannelId: String? = nil, displayMessage: String? = nil, fanFundingEventDetails: LiveChatFanFundingEventDetails? = nil, hasDisplayContent: Bool? = nil, liveChatId: String? = nil, memberMilestoneChatDetails: LiveChatMemberMilestoneChatDetails? = nil, messageDeletedDetails: LiveChatMessageDeletedDetails? = nil, messageRetractedDetails: LiveChatMessageRetractedDetails? = nil, newSponsorDetails: LiveChatNewSponsorDetails? = nil, publishedAt: DateTime? = nil, superChatDetails: LiveChatSuperChatDetails? = nil, superStickerDetails: LiveChatSuperStickerDetails? = nil, textMessageDetails: LiveChatTextMessageDetails? = nil, type: Type? = nil, userBannedDetails: LiveChatUserBannedMessageDetails? = nil) {
+  public init(authorChannelId: String? = nil, displayMessage: String? = nil, fanFundingEventDetails: LiveChatFanFundingEventDetails? = nil, hasDisplayContent: Bool? = nil, liveChatId: String? = nil, memberMilestoneChatDetails: LiveChatMemberMilestoneChatDetails? = nil, messageDeletedDetails: LiveChatMessageDeletedDetails? = nil, messageRetractedDetails: LiveChatMessageRetractedDetails? = nil, newSponsorDetails: LiveChatNewSponsorDetails? = nil, publishedAt: Date? = nil, superChatDetails: LiveChatSuperChatDetails? = nil, superStickerDetails: LiveChatSuperStickerDetails? = nil, textMessageDetails: LiveChatTextMessageDetails? = nil, type: Type? = nil, userBannedDetails: LiveChatUserBannedMessageDetails? = nil) {
     self.authorChannelId = authorChannelId
     self.displayMessage = displayMessage
     self.fanFundingEventDetails = fanFundingEventDetails

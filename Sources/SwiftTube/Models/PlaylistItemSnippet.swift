@@ -22,7 +22,7 @@ public struct PlaylistItemSnippet: Model {
   public var position: Int?
 
   /** The date and time that the item was added to the playlist. */
-  public var publishedAt: DateTime?
+  public var publishedAt: Date?
 
   /** The id object contains information that can be used to uniquely identify the resource that is included in the playlist as the playlist item. */
   public var resourceId: ResourceId?
@@ -39,7 +39,7 @@ public struct PlaylistItemSnippet: Model {
   /** Channel title for the channel this video belongs to. */
   public var videoOwnerChannelTitle: String?
 
-  public init(channelId: String? = nil, channelTitle: String? = nil, description: String? = nil, playlistId: String? = nil, position: Int? = nil, publishedAt: DateTime? = nil, resourceId: ResourceId? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil, videoOwnerChannelId: String? = nil, videoOwnerChannelTitle: String? = nil) {
+  public init(channelId: String? = nil, channelTitle: String? = nil, description: String? = nil, playlistId: String? = nil, position: Int? = nil, publishedAt: Date? = nil, resourceId: ResourceId? = nil, thumbnails: ThumbnailDetails? = nil, title: String? = nil, videoOwnerChannelId: String? = nil, videoOwnerChannelTitle: String? = nil) {
     self.channelId = channelId
     self.channelTitle = channelTitle
     self.description = description
