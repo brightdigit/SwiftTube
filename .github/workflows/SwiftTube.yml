@@ -7,6 +7,8 @@ on:
       - 'release/*'
       - 'bugfix/*'
     tags: '*'
+  pull_request:
+    types: '*'
 env:
   YOUTUBE_API_KEY:  ${{ secrets.YOUTUBE_API_KEY }}
   YOUTUBE_PLAYLIST_ID:  ${{ secrets.YOUTUBE_PLAYLIST_ID }}
