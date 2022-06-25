@@ -13,7 +13,12 @@ public extension Members {
       case allCurrent = "all_current"
     }
 
-    public final class Request: DeprecatedRequest<Response, YouTube.API> {
+    public struct Request: ServiceRequest {
+      public typealias ResponseType = Response
+      public var service: Service<ResponseType> {
+        YoutubeMembersList.service
+      }
+
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -91,16 +96,15 @@ public extension Members {
 
       public init(options: Options) {
         self.options = options
-        super.init(service: YoutubeMembersList.service)
       }
 
       /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], filterByMemberChannelId: String? = nil, hasAccessToLevel: String? = nil, maxResults: Int? = nil, mode: Mode? = nil, pageToken: String? = nil) {
+      public init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], filterByMemberChannelId: String? = nil, hasAccessToLevel: String? = nil, maxResults: Int? = nil, mode: Mode? = nil, pageToken: String? = nil) {
         let options = Options(dollarXgafv: dollarXgafv, accessToken: accessToken, alt: alt, callback: callback, fields: fields, key: key, oauthToken: oauthToken, prettyPrint: prettyPrint, quotaUser: quotaUser, uploadProtocol: uploadProtocol, uploadType: uploadType, part: part, filterByMemberChannelId: filterByMemberChannelId, hasAccessToLevel: hasAccessToLevel, maxResults: maxResults, mode: mode, pageToken: pageToken)
         self.init(options: options)
       }
 
-      override public var queryParameters: [String: Any] {
+      public var queryParameters: [String: Any] {
         var params: [String: Any] = [:]
         if let dollarXgafv = options.dollarXgafv?.encode() {
           params["$.xgafv"] = dollarXgafv

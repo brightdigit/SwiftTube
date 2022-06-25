@@ -28,7 +28,12 @@ public extension CommentThreads {
       case plainText
     }
 
-    public final class Request: DeprecatedRequest<Response, YouTube.API> {
+    public struct Request: ServiceRequest {
+      public typealias ResponseType = Response
+      public var service: Service<ResponseType> {
+        YoutubeCommentThreadsList.service
+      }
+
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -125,16 +130,15 @@ public extension CommentThreads {
 
       public init(options: Options) {
         self.options = options
-        super.init(service: YoutubeCommentThreadsList.service)
       }
 
       /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], allThreadsRelatedToChannelId: String? = nil, channelId: String? = nil, id: [String]? = nil, maxResults: Int? = nil, moderationStatus: ModerationStatus? = nil, order: Order? = nil, pageToken: String? = nil, searchTerms: String? = nil, textFormat: TextFormat? = nil, videoId: String? = nil) {
+      public init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], allThreadsRelatedToChannelId: String? = nil, channelId: String? = nil, id: [String]? = nil, maxResults: Int? = nil, moderationStatus: ModerationStatus? = nil, order: Order? = nil, pageToken: String? = nil, searchTerms: String? = nil, textFormat: TextFormat? = nil, videoId: String? = nil) {
         let options = Options(dollarXgafv: dollarXgafv, accessToken: accessToken, alt: alt, callback: callback, fields: fields, key: key, oauthToken: oauthToken, prettyPrint: prettyPrint, quotaUser: quotaUser, uploadProtocol: uploadProtocol, uploadType: uploadType, part: part, allThreadsRelatedToChannelId: allThreadsRelatedToChannelId, channelId: channelId, id: id, maxResults: maxResults, moderationStatus: moderationStatus, order: order, pageToken: pageToken, searchTerms: searchTerms, textFormat: textFormat, videoId: videoId)
         self.init(options: options)
       }
 
-      override public var queryParameters: [String: Any] {
+      public var queryParameters: [String: Any] {
         var params: [String: Any] = [:]
         if let dollarXgafv = options.dollarXgafv?.encode() {
           params["$.xgafv"] = dollarXgafv

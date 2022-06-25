@@ -100,7 +100,12 @@ public extension Search {
       case episode
     }
 
-    public final class Request: DeprecatedRequest<Response, YouTube.API> {
+    public struct Request: ServiceRequest {
+      public typealias ResponseType = Response
+      public var service: Service<ResponseType> {
+        YoutubeSearchList.service
+      }
+
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -279,16 +284,15 @@ public extension Search {
 
       public init(options: Options) {
         self.options = options
-        super.init(service: YoutubeSearchList.service)
       }
 
       /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], channelId: String? = nil, channelType: ChannelType? = nil, eventType: EventType? = nil, forContentOwner: Bool? = nil, forDeveloper: Bool? = nil, forMine: Bool? = nil, location: String? = nil, locationRadius: String? = nil, maxResults: Int? = nil, onBehalfOfContentOwner: String? = nil, order: Order? = nil, pageToken: String? = nil, publishedAfter: String? = nil, publishedBefore: String? = nil, q: String? = nil, regionCode: String? = nil, relatedToVideoId: String? = nil, relevanceLanguage: String? = nil, safeSearch: SafeSearch? = nil, topicId: String? = nil, type: [String]? = nil, videoCaption: VideoCaption? = nil, videoCategoryId: String? = nil, videoDefinition: VideoDefinition? = nil, videoDimension: VideoDimension? = nil, videoDuration: VideoDuration? = nil, videoEmbeddable: VideoEmbeddable? = nil, videoLicense: VideoLicense? = nil, videoSyndicated: VideoSyndicated? = nil, videoType: VideoType? = nil) {
+      public init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], channelId: String? = nil, channelType: ChannelType? = nil, eventType: EventType? = nil, forContentOwner: Bool? = nil, forDeveloper: Bool? = nil, forMine: Bool? = nil, location: String? = nil, locationRadius: String? = nil, maxResults: Int? = nil, onBehalfOfContentOwner: String? = nil, order: Order? = nil, pageToken: String? = nil, publishedAfter: String? = nil, publishedBefore: String? = nil, q: String? = nil, regionCode: String? = nil, relatedToVideoId: String? = nil, relevanceLanguage: String? = nil, safeSearch: SafeSearch? = nil, topicId: String? = nil, type: [String]? = nil, videoCaption: VideoCaption? = nil, videoCategoryId: String? = nil, videoDefinition: VideoDefinition? = nil, videoDimension: VideoDimension? = nil, videoDuration: VideoDuration? = nil, videoEmbeddable: VideoEmbeddable? = nil, videoLicense: VideoLicense? = nil, videoSyndicated: VideoSyndicated? = nil, videoType: VideoType? = nil) {
         let options = Options(dollarXgafv: dollarXgafv, accessToken: accessToken, alt: alt, callback: callback, fields: fields, key: key, oauthToken: oauthToken, prettyPrint: prettyPrint, quotaUser: quotaUser, uploadProtocol: uploadProtocol, uploadType: uploadType, part: part, channelId: channelId, channelType: channelType, eventType: eventType, forContentOwner: forContentOwner, forDeveloper: forDeveloper, forMine: forMine, location: location, locationRadius: locationRadius, maxResults: maxResults, onBehalfOfContentOwner: onBehalfOfContentOwner, order: order, pageToken: pageToken, publishedAfter: publishedAfter, publishedBefore: publishedBefore, q: q, regionCode: regionCode, relatedToVideoId: relatedToVideoId, relevanceLanguage: relevanceLanguage, safeSearch: safeSearch, topicId: topicId, type: type, videoCaption: videoCaption, videoCategoryId: videoCategoryId, videoDefinition: videoDefinition, videoDimension: videoDimension, videoDuration: videoDuration, videoEmbeddable: videoEmbeddable, videoLicense: videoLicense, videoSyndicated: videoSyndicated, videoType: videoType)
         self.init(options: options)
       }
 
-      override public var queryParameters: [String: Any] {
+      public var queryParameters: [String: Any] {
         var params: [String: Any] = [:]
         if let dollarXgafv = options.dollarXgafv?.encode() {
           params["$.xgafv"] = dollarXgafv
