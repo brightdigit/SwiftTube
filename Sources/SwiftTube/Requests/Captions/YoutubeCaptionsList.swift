@@ -144,7 +144,14 @@ public extension Captions {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response {
+      public var response: Prch.ClientResult<SuccessType, FailureType> {
+        switch self {
+        case let .status200(response):
+          return .success(response)
+        }
+      }
+
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = CaptionListResponse
@@ -153,12 +160,6 @@ public extension Captions {
       case status200(CaptionListResponse)
 
       public var success: CaptionListResponse? {
-        switch self {
-        case let .status200(response): return response
-        }
-      }
-
-      public var response: Any {
         switch self {
         case let .status200(response): return response
         }

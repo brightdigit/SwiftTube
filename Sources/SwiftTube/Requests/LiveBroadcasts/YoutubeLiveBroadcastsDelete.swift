@@ -132,7 +132,14 @@ public extension LiveBroadcasts {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response {
+      public var response: Prch.ClientResult<SuccessType, FailureType> {
+        switch self {
+        case .status200:
+          return .success(())
+        }
+      }
+
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = Void
@@ -143,12 +150,6 @@ public extension LiveBroadcasts {
       public var success: Void? {
         switch self {
         case .status200: return ()
-        }
-      }
-
-      public var response: Any {
-        switch self {
-        default: return ()
         }
       }
 

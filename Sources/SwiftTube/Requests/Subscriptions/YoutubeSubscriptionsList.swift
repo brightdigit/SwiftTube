@@ -201,7 +201,14 @@ public extension Subscriptions {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response {
+      public var response: Prch.ClientResult<SuccessType, FailureType> {
+        switch self {
+        case let .status200(response):
+          return .success(response)
+        }
+      }
+
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = SubscriptionListResponse
@@ -210,12 +217,6 @@ public extension Subscriptions {
       case status200(SubscriptionListResponse)
 
       public var success: SubscriptionListResponse? {
-        switch self {
-        case let .status200(response): return response
-        }
-      }
-
-      public var response: Any {
         switch self {
         case let .status200(response): return response
         }

@@ -124,7 +124,14 @@ public extension I18nLanguages {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response {
+      public var response: Prch.ClientResult<SuccessType, FailureType> {
+        switch self {
+        case let .status200(response):
+          return .success(response)
+        }
+      }
+
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = I18nLanguageListResponse
@@ -133,12 +140,6 @@ public extension I18nLanguages {
       case status200(I18nLanguageListResponse)
 
       public var success: I18nLanguageListResponse? {
-        switch self {
-        case let .status200(response): return response
-        }
-      }
-
-      public var response: Any {
         switch self {
         case let .status200(response): return response
         }

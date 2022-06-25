@@ -118,7 +118,14 @@ public extension MembershipsLevels {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response {
+      public var response: Prch.ClientResult<SuccessType, FailureType> {
+        switch self {
+        case let .status200(response):
+          return .success(response)
+        }
+      }
+
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = MembershipsLevelListResponse
@@ -127,12 +134,6 @@ public extension MembershipsLevels {
       case status200(MembershipsLevelListResponse)
 
       public var success: MembershipsLevelListResponse? {
-        switch self {
-        case let .status200(response): return response
-        }
-      }
-
-      public var response: Any {
         switch self {
         case let .status200(response): return response
         }
