@@ -6,7 +6,13 @@ public extension LiveBroadcasts {
   enum YoutubeLiveBroadcastsUpdate {
     public static let service = Service<Response>(id: "youtube.liveBroadcasts.update", tag: "liveBroadcasts", method: "PUT", path: "/youtube/v3/liveBroadcasts", hasBody: true, securityRequirements: [SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube"]), SecurityRequirement(type: "Oauth2", scopes: ["https://www.googleapis.com/auth/youtube.force-ssl"])])
 
-    public final class Request: DeprecatedRequest<Response, YouTube.API> {
+    public struct Request: ServiceRequest {
+      public typealias ResponseType = Response
+
+      public var service: Service<Response> {
+        YoutubeLiveBroadcastsUpdate.service
+      }
+
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -72,21 +78,18 @@ public extension LiveBroadcasts {
 
       public var body: LiveBroadcast?
 
-      public init(body: LiveBroadcast?, options: Options, encoder: RequestEncoder? = nil) {
+      public init(body: LiveBroadcast?, options: Options, encoder _: RequestEncoder? = nil) {
         self.body = body
         self.options = options
-        super.init(service: YoutubeLiveBroadcastsUpdate.service) { defaultEncoder in
-          try (encoder ?? defaultEncoder).encode(body)
-        }
       }
 
       /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], onBehalfOfContentOwner: String? = nil, onBehalfOfContentOwnerChannel: String? = nil, body: LiveBroadcast? = nil) {
+      public init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], onBehalfOfContentOwner: String? = nil, onBehalfOfContentOwnerChannel: String? = nil, body: LiveBroadcast? = nil) {
         let options = Options(dollarXgafv: dollarXgafv, accessToken: accessToken, alt: alt, callback: callback, fields: fields, key: key, oauthToken: oauthToken, prettyPrint: prettyPrint, quotaUser: quotaUser, uploadProtocol: uploadProtocol, uploadType: uploadType, part: part, onBehalfOfContentOwner: onBehalfOfContentOwner, onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel)
         self.init(body: body, options: options)
       }
 
-      override public var queryParameters: [String: Any] {
+      public var queryParameters: [String: Any] {
         var params: [String: Any] = [:]
         if let dollarXgafv = options.dollarXgafv?.encode() {
           params["$.xgafv"] = dollarXgafv
@@ -132,7 +135,14 @@ public extension LiveBroadcasts {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response {
+      public var response: Prch.ClientResult<SuccessType, FailureType> {
+        switch self {
+        case let .status200(response):
+          return .success(response)
+        }
+      }
+
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = LiveBroadcast
@@ -141,12 +151,6 @@ public extension LiveBroadcasts {
       case status200(LiveBroadcast)
 
       public var success: LiveBroadcast? {
-        switch self {
-        case let .status200(response): return response
-        }
-      }
-
-      public var response: Any {
         switch self {
         case let .status200(response): return response
         }

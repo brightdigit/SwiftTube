@@ -12,7 +12,12 @@ public extension ThirdPartyLinks {
       case channelToStoreLink
     }
 
-    public final class Request: DeprecatedRequest<Response, YouTube.API> {
+    public struct Request: ServiceRequest {
+      public typealias ResponseType = Response
+      public var service: Service<ResponseType> {
+        YoutubeThirdPartyLinksList.service
+      }
+
       public struct Options {
         /** V1 error format. */
         public var dollarXgafv: Xgafv?
@@ -78,16 +83,15 @@ public extension ThirdPartyLinks {
 
       public init(options: Options) {
         self.options = options
-        super.init(service: YoutubeThirdPartyLinksList.service)
       }
 
       /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], linkingToken: String? = nil, type: Type? = nil) {
+      public init(dollarXgafv: Xgafv? = nil, accessToken: String? = nil, alt: Alt? = nil, callback: String? = nil, fields: String? = nil, key: String? = nil, oauthToken: String? = nil, prettyPrint: Bool? = nil, quotaUser: String? = nil, uploadProtocol: String? = nil, uploadType: String? = nil, part: [String], linkingToken: String? = nil, type: Type? = nil) {
         let options = Options(dollarXgafv: dollarXgafv, accessToken: accessToken, alt: alt, callback: callback, fields: fields, key: key, oauthToken: oauthToken, prettyPrint: prettyPrint, quotaUser: quotaUser, uploadProtocol: uploadProtocol, uploadType: uploadType, part: part, linkingToken: linkingToken, type: type)
         self.init(options: options)
       }
 
-      override public var queryParameters: [String: Any] {
+      public var queryParameters: [String: Any] {
         var params: [String: Any] = [:]
         if let dollarXgafv = options.dollarXgafv?.encode() {
           params["$.xgafv"] = dollarXgafv
@@ -133,7 +137,14 @@ public extension ThirdPartyLinks {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response {
+      public var response: Prch.ClientResult<SuccessType, FailureType> {
+        switch self {
+        case let .status200(response):
+          return .success(response)
+        }
+      }
+
       public typealias FailureType = Never
       public typealias APIType = YouTube.API
       public typealias SuccessType = ThirdPartyLink
@@ -142,12 +153,6 @@ public extension ThirdPartyLinks {
       case status200(ThirdPartyLink)
 
       public var success: ThirdPartyLink? {
-        switch self {
-        case let .status200(response): return response
-        }
-      }
-
-      public var response: Any {
         switch self {
         case let .status200(response): return response
         }
