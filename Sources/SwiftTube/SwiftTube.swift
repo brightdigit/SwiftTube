@@ -10,7 +10,7 @@ public enum YouTube {
   public static var safeArrayDecoding = false
 
   /// Used to encode Dates when uses as string params
-  public static var dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZZZZ",
+  public static var dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZ",
                                                           locale: Locale(identifier: "en_US_POSIX"),
                                                           calendar: Calendar(identifier: .gregorian))
 
