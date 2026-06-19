@@ -1,0 +1,3 @@
+ignore:
+  - "Tests"
+  - "Sources/SwiftTube/Generated"
