@@ -220,17 +220,3 @@ public struct YouTubeClient: Sendable {
     return (body.items ?? []).map(YouTubeVideo.init(from:))
   }
 }
-
-extension Array {
-  /// Splits the array into consecutive subarrays of at most `size` elements,
-  /// preserving order. The final chunk may be shorter.
-  ///
-  /// - Parameter size: Maximum length of each chunk. Must be greater than zero.
-  /// - Returns: The array split into chunks of at most `size` elements.
-  internal func chunked(by size: Int) -> [[Element]] {
-    precondition(size > 0, "chunk size must be greater than zero")
-    return stride(from: 0, to: count, by: size).map { start in
-      Array(self[start..<Swift.min(start + size, count)])
-    }
-  }
-}
