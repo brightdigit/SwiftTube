@@ -29,7 +29,12 @@
 
 import Foundation
 import OpenAPIRuntime
-import OpenAPIURLSession
+
+// URLSession transport is unavailable on WASI; the URLSession-defaulting
+// initializer is gated behind #if !os(WASI) below.
+#if !os(WASI)
+  import OpenAPIURLSession
+#endif
 
 #if canImport(FoundationNetworking)
   import FoundationNetworking
@@ -67,14 +72,14 @@ public struct YouTubeClient: Sendable {
   private let underlying: Client
   private let apiKey: String
 
-  /// Creates a client.
+  /// Creates a client with an explicit transport.
   ///
   /// - Parameters:
   ///   - apiKey: YouTube Data API key.
-  ///   - transport: The transport to use. Defaults to `URLSessionTransport`.
+  ///   - transport: The transport to use.
   public init(
     apiKey: String,
-    transport: any ClientTransport = URLSessionTransport()
+    transport: any ClientTransport
   ) {
     self.apiKey = apiKey
     underlying = Client(
@@ -82,6 +87,16 @@ public struct YouTubeClient: Sendable {
       transport: transport
     )
   }
+
+  // URLSession transport is unavailable on WASI; this convenience (default
+  // `URLSessionTransport`) is gated. WASI callers pass an explicit transport above.
+  #if !os(WASI)
+    /// Creates a client using the default `URLSessionTransport`.
+    /// - Parameter apiKey: YouTube Data API key.
+    public init(apiKey: String) {
+      self.init(apiKey: apiKey, transport: URLSessionTransport())
+    }
+  #endif
 
   /// Creates a client wrapping an already-configured generated client.
   ///
