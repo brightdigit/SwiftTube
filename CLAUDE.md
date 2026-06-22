@@ -54,11 +54,12 @@ Swift Testing (`@Suite` / `@Test` / `#expect`), not XCTest. Tests inject a **`Mo
 
 `.github/workflows/SwiftTube.yml` is the shared BrightDigit Swift 6.4 template: Linux (+ wasm/wasm-embedded), macOS, Windows, Android, and the Apple-platform simulator suite (iOS/watchOS/tvOS), plus a lint job. Matrix scope is tiered by branch/event (small set always; full matrix + Windows on main/semver/dispatch/PRs into main). wasm and watchOS legs are gated by the `ENABLE_WASM` / `ENABLE_WATCHOS` repo variables; wasm/embedded are build-only. Skip CI with `ci skip` in the commit message.
 
-Two smaller workflows are adapted from brightdigit/MistKit:
+Three smaller workflows are adapted from brightdigit/MistKit:
 - `check-unsafe-flags.yml` — fails if `swift package dump-package` reports any `unsafeFlags`. **Note:** it must run in the `swiftlang/swift:nightly-6.4.x-noble` container (not `swift:latest`), because the `swift-tools-version:6.4` manifest can't be parsed by older toolchains. Keep this container in sync with the Linux leg of `SwiftTube.yml`.
 - `cleanup-caches.yml` — deletes Actions caches for a branch when it's deleted (version-agnostic).
+- `swift-source-compat.yml` — `swift build -c release` for source compatibility. MistKit's version matrixes released toolchains (`swift:6.1–6.3`), but none can parse the 6.4 manifest, so this build was **inverted**: it tests the current `nightly-6.4.x-noble` branch (blocking) and the `nightly-main-noble` development trunk (`continue-on-error` — an informational early-warning leg for forthcoming-Swift breakage). Keep the 6.4 container in sync with the Linux leg of `SwiftTube.yml`.
 
-(MistKit's `codeql.yml` and `swift-source-compat.yml` were intentionally **not** added: both build with toolchains older than 6.4 — GitHub-hosted `macos-26`/`Xcode_26.4` and `swift:6.1–6.3` respectively — which cannot parse the 6.4 manifest.)
+(MistKit's `codeql.yml` was intentionally **not** added: it builds with a toolchain older than 6.4 — GitHub-hosted `macos-26`/`Xcode_26.4` — which cannot parse the 6.4 manifest. CodeQL's Swift analysis is macOS-only and can't run in the nightly-6.4 Linux container the other workflows use.)
 
 ## Conventions
 
