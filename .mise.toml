@@ -1,0 +1,23 @@
+[settings]
+# Enable experimental features (required for the spm backend)
+experimental = true
+
+[tools]
+# Swift development tools (managed via mise)
+# 604.x aligns swift-format (and its swift-syntax) with the Swift 6.4 toolchain.
+# Only one 604 tag exists so far; bump when a newer 604 prerelease/release lands.
+"spm:swiftlang/swift-format" = "604.0.0-prerelease-2025-12-17"
+"aqua:realm/SwiftLint" = "0.63.2"
+"spm:peripheryapp/periphery" = "3.7.4"
+# OpenAPI client codegen CLI (NOT a SwiftPM dependency/plugin). The generated
+# Client.swift/Types.swift are produced ahead of time and committed; regenerate
+# with `mise run generate-openapi` (Scripts/generate-openapi-swifttube.sh). Keep
+# this version in sync with that script's GENERATOR pin.
+"spm:apple/swift-openapi-generator" = "1.12.2"
+
+[tasks]
+swift-format = "swift-format"
+swiftlint = "swiftlint"
+periphery = "periphery"
+swift-openapi-generator = "swift-openapi-generator"
+generate-openapi = "./Scripts/generate-openapi-swifttube.sh"
