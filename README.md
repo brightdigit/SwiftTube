@@ -1,24 +1,18 @@
-<p align="center">
-    <img alt="SwiftTube" title="SwiftTube" src="Sources/SwiftTube/SwiftTube.docc/Resources/logo-transparent.svg" height="200">
-</p>
+![SwiftTube Logo](Sources/SwiftTube/SwiftTube.docc/Resources/logo-transparent.svg)
 
 # SwiftTube
 
-<p align="center">A lightweight <code>async</code>/<code>await</code> Swift client for a focused slice of the YouTube Data API v3.</p>
 
-<!-- Platform Compatibility -->
 [![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSwiftTube%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/SwiftTube)
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSwiftTube%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brightdigit/SwiftTube)
-
-<!-- Documentation & License -->
 [![Documentation](https://img.shields.io/badge/docc-read_documentation-blue)](https://swiftpackageindex.com/brightdigit/SwiftTube/documentation)
 [![License](https://img.shields.io/github/license/brightdigit/SwiftTube)](LICENSE)
-
-<!-- CI/CD & Code Quality -->
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brightdigit/SwiftTube/SwiftTube.yml?label=actions&logo=github&branch=main)](https://github.com/brightdigit/SwiftTube/actions)
 [![Maintainability](https://qlty.sh/gh/brightdigit/projects/SwiftTube/maintainability.svg)](https://qlty.sh/gh/brightdigit/projects/SwiftTube)
 [![Codecov](https://img.shields.io/codecov/c/github/brightdigit/SwiftTube)](https://codecov.io/gh/brightdigit/SwiftTube)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/brightdigit/SwiftTube)](https://www.codefactor.io/repository/github/brightdigit/SwiftTube)
+
+A lightweight `async`/`await` Swift client for a focused slice of the YouTube Data API v3.
 
 ---
 
@@ -38,7 +32,7 @@ Add SwiftTube as a Swift Package Manager dependency:
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/brightdigit/SwiftTube.git", from: "0.2.0")
+  .package(url: "https://github.com/brightdigit/SwiftTube.git", from: "1.0.0-alpha.1")
 ],
 targets: [
   .target(
