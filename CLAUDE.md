@@ -66,3 +66,15 @@ Three smaller workflows are adapted from brightdigit/MistKit:
 - Swift 6.4 toolchain, strict concurrency; public types are `Sendable`.
 - swift-format config in `.swift-format`, SwiftLint in `.swiftlint.yml`. Both run `--strict` in CI — formatting/lint failures fail the build.
 - Suppressions are explicit and paired: `// swift-format-ignore: NeverForceUnwrap` alongside `// swiftlint:disable:this force_unwrapping` for the one intentional force-unwrap (`serverURL`).
+
+## Memory & Corrections Convention
+
+`.claude/agent-notes.md` is the canonical, versioned corrections log for this repository — an
+append-only record of the maintainer's corrections and standing **always/never** directives.
+
+- **Read `.claude/agent-notes.md` at the start of every work session, before doing any work.** It
+  is the source of truth for *how* to work in this repo.
+- **Whenever the maintainer makes a correction or gives an always/never instruction, append one
+  line to `.claude/agent-notes.md` proactively (without being asked).** One line per directive,
+  newest at the bottom. If a directive supersedes an earlier one, update or remove the stale line
+  rather than leaving both.
