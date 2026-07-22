@@ -1,8 +1,26 @@
 <p align="center">
-  <img src="Assets/logo-transparent.svg" alt="SwiftTube" width="300" />
+    <img alt="SwiftTube" title="SwiftTube" src="Sources/SwiftTube/SwiftTube.docc/Resources/logo-transparent.svg" height="200">
 </p>
 
 # SwiftTube
+
+<p align="center">A lightweight <code>async</code>/<code>await</code> Swift client for a focused slice of the YouTube Data API v3.</p>
+
+<!-- Platform Compatibility -->
+[![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSwiftTube%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/SwiftTube)
+[![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSwiftTube%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brightdigit/SwiftTube)
+
+<!-- Documentation & License -->
+[![Documentation](https://img.shields.io/badge/docc-read_documentation-blue)](https://swiftpackageindex.com/brightdigit/SwiftTube/documentation)
+[![License](https://img.shields.io/github/license/brightdigit/SwiftTube)](LICENSE)
+
+<!-- CI/CD & Code Quality -->
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brightdigit/SwiftTube/SwiftTube.yml?label=actions&logo=github&branch=main)](https://github.com/brightdigit/SwiftTube/actions)
+[![Maintainability](https://qlty.sh/gh/brightdigit/projects/SwiftTube/maintainability.svg)](https://qlty.sh/gh/brightdigit/projects/SwiftTube)
+[![Codecov](https://img.shields.io/codecov/c/github/brightdigit/SwiftTube)](https://codecov.io/gh/brightdigit/SwiftTube)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/brightdigit/SwiftTube)](https://www.codefactor.io/repository/github/brightdigit/SwiftTube)
+
+---
 
 A lightweight, `async`/`await` Swift client for a focused slice of the [YouTube Data API v3](https://developers.google.com/youtube/v3), built on Apple's [swift-openapi-generator](https://github.com/apple/swift-openapi-generator).
 
