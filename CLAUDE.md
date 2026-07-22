@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-SwiftTube is a small, focused async Swift client over a **filtered slice** of the YouTube Data API v3. It is not a full API wrapper — it intentionally exposes only the two operations the brightdigit.com podcast importer needs: `playlistItems.list` (paged) and `videos.list` (batched by id). The public surface is essentially `YouTubeClient.videos(forPlaylistID:)` returning `[YouTubeVideo]`.
+SwiftTube is a small, focused async Swift client over a **filtered slice** of the YouTube Data API v3. It is not a full API wrapper — it intentionally exposes only the two operations the brightdigit.com podcast importer needs: `playlistItems.list` (paged) and `videos.list` (batched by id). The public surface is essentially `YouTubeClient.videos(forPlaylistID:)` returning `[Video]`.
 
 ## Commands
 
@@ -37,7 +37,7 @@ Generated files carry `periphery:ignore:all` and `swift-format-ignore-file` mark
 Three hand-written files wrap the generated client:
 
 - **`YouTubeClient.swift`** — the public `struct YouTubeClient: Sendable`. Wraps the generated `Client`. `videos(forPlaylistID:)` follows playlist pagination to collect video ids (`playlistVideoIDs`), chunks them into batches of `batchSize` (50 — the API's per-request id limit), then fetches batches **concurrently via `withThrowingTaskGroup`, reassembling them in batch order** so output is deterministic. API key and field-selector strings are injected on every query. Non-200 / undocumented responses throw `ClientError.invalidResponse` (unwrapping happens in the private `okJSON` helpers).
-- **`YouTubeVideo.swift`** — flat, all-optional, `Sendable`/`Equatable` value type mapped from the generated `Components.Schemas.Video`. Intentionally non-throwing: presence validation is the caller's job.
+- **`Video.swift`** — flat, all-optional, `Sendable`/`Equatable` value type mapped from the generated `Components.Schemas.Video`. Intentionally non-throwing: presence validation is the caller's job.
 - **`Array+Chunked.swift`** — `chunked(by:)` batching helper.
 
 Three initializers on `YouTubeClient`: `init(apiKey:transport:)` (explicit transport), `init(apiKey:)` (default `URLSessionTransport`, **gated behind `#if !os(WASI)`**), and `init(apiKey:client:)` (inject a pre-built generated `Client` — used by tests).

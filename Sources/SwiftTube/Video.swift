@@ -1,5 +1,5 @@
 //
-//  YouTubeVideo.swift
+//  Video.swift
 //  SwiftTube
 //
 //  Created by Leo Dion.
@@ -34,7 +34,7 @@ import Foundation
 /// All fields are optional because the importer is responsible for validating
 /// presence and emitting domain-specific errors; this type intentionally does
 /// not throw.
-public struct YouTubeVideo: Equatable, Sendable {
+public struct Video: Equatable, Sendable {
   /// The video id.
   public let id: String?
   /// The video title.
@@ -66,7 +66,7 @@ public struct YouTubeVideo: Equatable, Sendable {
   }
 }
 
-extension YouTubeVideo {
+extension Video {
   /// Maps a generated OpenAPI `Video` schema into the flat importer model.
   internal init(from video: Components.Schemas.Video) {
     self.init(

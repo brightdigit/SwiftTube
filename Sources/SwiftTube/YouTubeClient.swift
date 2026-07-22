@@ -67,7 +67,7 @@ public struct YouTubeClient: Sendable {
   /// Field selector for the videos request.
   private static let videoFields =
     "items(id,contentDetails/duration,snippet/title,"
-    + "snippet/description,snippet/publishedAt,snippet/thumbnails)"
+    + "snippet/description,snippet/publishedAt,snippet/thumbnails/standard/url)"
 
   private let underlying: Client
   private let apiKey: String
@@ -136,11 +136,13 @@ public struct YouTubeClient: Sendable {
   ///
   /// Follows playlist pagination, then fetches video details in batches of
   /// ``batchSize`` (the API's per-request id limit), running the batches
-  /// concurrently and reassembling them in batch order so the result is
-  /// deterministic.
+  /// concurrently and reassembling them in batch order. Within a batch, order
+  /// follows the `videos.list` response, not the requested id order. Videos
+  /// that no longer exist (deleted / made private) are omitted by the API, so
+  /// the result may contain fewer entries than the playlist references.
   public func videos(
     forPlaylistID playlistID: String
-  ) async throws -> [YouTubeVideo] {
+  ) async throws -> [Video] {
     let ids = try await playlistVideoIDs(playlistID: playlistID)
     let batches = ids.chunked(by: Self.batchSize)
     return try await videoDetails(forBatches: batches)
@@ -162,7 +164,8 @@ public struct YouTubeClient: Sendable {
         $0.snippet?.resourceId?.videoId
       }
       pageToken = body.nextPageToken
-    } while pageToken != nil
+      // Stop on nil *or* "" so an empty token can't spin the loop forever.
+    } while pageToken?.isEmpty == false
 
     return ids
   }
@@ -186,13 +189,13 @@ public struct YouTubeClient: Sendable {
   }
 
   /// Fetches video details for each batch of ids concurrently, preserving
-  /// batch order in the flattened result.
+  /// batch order in the flattened result (order within a batch follows the API).
   private func videoDetails(
     forBatches batches: [[String]]
-  ) async throws -> [YouTubeVideo] {
-    var results = [[YouTubeVideo]?](repeating: nil, count: batches.count)
+  ) async throws -> [Video] {
+    var results = [[Video]?](repeating: nil, count: batches.count)
     try await withThrowingTaskGroup(
-      of: (Int, [YouTubeVideo]).self
+      of: (Int, [Video]).self
     ) { group in
       for (index, batch) in batches.enumerated() {
         group.addTask {
@@ -207,7 +210,7 @@ public struct YouTubeClient: Sendable {
   }
 
   /// Fetches video details for a single batch of ids.
-  private func videoBatch(ids: [String]) async throws -> [YouTubeVideo] {
+  private func videoBatch(ids: [String]) async throws -> [Video] {
     let response = try await underlying.listVideos(
       query: .init(
         key: apiKey,
@@ -217,6 +220,6 @@ public struct YouTubeClient: Sendable {
       )
     )
     let body = try Self.okJSON(response)
-    return (body.items ?? []).map(YouTubeVideo.init(from:))
+    return (body.items ?? []).map(Video.init(from:))
   }
 }

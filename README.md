@@ -46,14 +46,14 @@ for video in videos {
 }
 ```
 
-`videos(forPlaylistID:)` transparently follows playlist pagination to collect every video id, then fetches the video details in concurrent batches of 50 (the API's per-request id limit), reassembling them **in playlist order** so the result is deterministic.
+`videos(forPlaylistID:)` transparently follows playlist pagination to collect every video id, then fetches the video details in concurrent batches of 50 (the API's per-request id limit).
 
-### `YouTubeVideo`
+### `Video`
 
 Each result is a flat, `Sendable`/`Equatable` value mapped from the API response. Every field is optional — presence validation is left to the caller, so the type never throws:
 
 ```swift
-public struct YouTubeVideo: Equatable, Sendable {
+public struct Video: Equatable, Sendable {
   public let id: String?
   public let title: String?
   public let description: String?

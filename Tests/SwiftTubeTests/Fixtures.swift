@@ -24,4 +24,33 @@ internal enum Fixtures {
     "description":"d3","publishedAt":"2020-01-03T00:00:00Z",\
     "thumbnails":{"standard":{"url":"https://img/3.jpg"}}}}]}
     """
+
+  /// Builds a `playlistItems.list` page body for the given video ids, optionally
+  /// carrying a `nextPageToken` so pagination continues.
+  internal static func playlistPage(
+    ids: [String],
+    nextPageToken: String? = nil
+  ) -> String {
+    let items = ids.map {
+      #"{"snippet":{"resourceId":{"videoId":"\#($0)"}}}"#
+    }
+    .joined(separator: ",")
+    let token = nextPageToken.map { #""nextPageToken":"\#($0)","# } ?? ""
+    return #"{\#(token)"items":[\#(items)]}"#
+  }
+
+  /// Builds a `videos.list` body for the given ids (in the order supplied), with
+  /// title/description/duration/thumbnail derived from each id.
+  internal static func videos(ids: [String]) -> String {
+    let items = ids.map { id in
+      #"""
+      {"id":"\#(id)","contentDetails":{"duration":"PT5M"},\#
+      "snippet":{"title":"T-\#(id)","description":"desc-\#(id)",\#
+      "publishedAt":"2020-01-01T00:00:00Z",\#
+      "thumbnails":{"standard":{"url":"https://img/\#(id).jpg"}}}}
+      """#
+    }
+    .joined(separator: ",")
+    return #"{"items":[\#(items)]}"#
+  }
 }
