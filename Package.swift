@@ -1,60 +1,68 @@
-// swift-tools-version:5.2.0
+// swift-tools-version:6.4
 // swiftlint:disable explicit_top_level_acl
 import PackageDescription
 
 let package = Package(
   name: "SwiftTube",
   platforms: [
-    .macOS(.v10_15),
-    .iOS(.v10),
-    .tvOS(.v10),
-    .watchOS(.v3)
+    .macOS(.v13),
+    .iOS(.v16),
+    .tvOS(.v16),
+    .watchOS(.v9)
   ],
   products: [
     .library(name: "SwiftTube", targets: ["SwiftTube"])
   ],
   dependencies: [
-    .package(url: "https://github.com/shibapm/Komondor", from: "1.1.1"), // dev
-    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
-    .package(url: "https://github.com/realm/SwiftLint", from: "0.41.0"), // dev
-    .package(url: "https://github.com/shibapm/Rocket", from: "1.2.0"), // dev
-    .package(url: "https://github.com/brightdigit/swift-test-codecov", from: "1.0.0"), // dev
-    .package(url: "https://github.com/brightdigit/Prch.git", from: "0.2.1")
+    // Runtime only — swift-openapi-generator is a mise-managed CLI tool
+    // (see .mise.toml / Scripts/generate-openapi-swifttube.sh), NOT a package dependency
+    // or build/command plugin. Generated code is committed under
+    // Sources/SwiftTube/Generated.
+    .package(
+      url: "https://github.com/apple/swift-openapi-runtime",
+      from: "1.8.0"
+    ),
+    .package(
+      url: "https://github.com/apple/swift-openapi-urlsession",
+      from: "1.0.0"
+    ),
+    // Transitive via swift-openapi-runtime; declared explicitly so the
+    // contract tests can name HTTPRequest/HTTPResponse in their mock transport.
+    .package(
+      url: "https://github.com/apple/swift-http-types",
+      from: "1.0.0"
+    )
   ],
   targets: [
-    .target(name: "SwiftTube", dependencies: ["Prch"]),
-    .testTarget(name: "SwiftTubeTests", dependencies: ["SwiftTube"])
+    .target(
+      name: "SwiftTube",
+      dependencies: [
+        .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+        // URLSession transport is unavailable on WASI; exclude it there so the
+        // wasm / wasm-embedded builds link. Mirrors brightdigit/MistKit.
+        .product(
+          name: "OpenAPIURLSession",
+          package: "swift-openapi-urlsession",
+          condition: .when(platforms: Platform.withoutWASI)
+        )
+      ]
+    ),
+    .testTarget(
+      name: "SwiftTubeTests",
+      dependencies: [
+        "SwiftTube",
+        .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+        .product(name: "HTTPTypes", package: "swift-http-types")
+      ]
+    )
   ]
 )
 
-#if canImport(PackageConfig)
-  import PackageConfig
-
-  let requiredCoverage: Int = 85
-
-  let config = PackageConfiguration([
-    "rocket": [
-      "steps": [
-        ["hide_dev_dependencies": ["package_path": "Package@swift-5.5.swift"]],
-        "hide_dev_dependencies",
-        "git_add",
-        "commit",
-        "tag",
-        "unhide_dev_dependencies",
-        ["unhide_dev_dependencies": ["package_path": "Package@swift-5.5.swift"]],
-        "git_add",
-        ["commit": ["message": "Unhide dev dependencies"]]
-      ]
-    ],
-    "komondor": [
-      "pre-commit": [
-        "swift test --generate-linuxmain",
-        "swift run swiftformat .",
-        "swift run swiftlint autocorrect",
-        "git add .",
-        "swift run swiftformat --lint .",
-        "swift run swiftlint"
-      ]
-    ]
-  ]).write()
-#endif
+// All platforms except WASI. OpenAPIURLSession (URLSession transport) doesn't
+// build for wasm/wasm-embedded, so URLSession-backed dependencies are scoped to
+// these platforms. Mirrors brightdigit/MistKit.
+extension Platform {
+  static let withoutWASI: [Platform] = [
+    .macOS, .macCatalyst, .iOS, .tvOS, .watchOS, .visionOS, .driverKit, .linux, .windows, .android
+  ]
+}

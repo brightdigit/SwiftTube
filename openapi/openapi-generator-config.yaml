@@ -1,0 +1,25 @@
+# swift-openapi-generator configuration.
+#
+# Produces ahead-of-time Client.swift + Types.swift (committed under
+# Sources/SwiftTube/Generated) from the filtered spec. The generator runs via
+# the mise-managed CLI, NOT a SwiftPM build/command plugin — see
+# Scripts/generate-openapi-swifttube.sh.
+generate:
+  - types
+  - client
+accessModifier: public
+# Mark every generated file so swift-format and periphery skip it via in-file
+# markers. (SwiftLint can't be suppressed in-file — blanket_disable_command +
+# file_name — so it keeps a path exclude in .swiftlint.yml.)
+additionalFileComments:
+  - periphery:ignore:all
+  - swift-format-ignore-file
+# Reduce the full YouTube Data API v3 document (openapi/youtube-openapi.json,
+# ~80 operations) down to only the operations the brightdigit.com podcast
+# importer consumes. `swift-openapi-generator generate` honors this `filter:`
+# key directly, so no separate `filter` pre-pass is needed; the generator
+# automatically pulls in every schema/parameter these operations depend on.
+filter:
+  operations:
+    - listPlaylistItems  # playlistItems.list — paged video ids for a playlist
+    - listVideos         # videos.list — batched video detail lookup

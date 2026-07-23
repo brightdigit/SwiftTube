@@ -1,0 +1,51 @@
+name: Swift Source Compatibility
+
+# Adapted from brightdigit/MistKit's swift-source-compat.yml. MistKit tests a
+# matrix of released toolchains (swift:6.1 / 6.2 / 6.3), but SwiftTube's
+# Package.swift is swift-tools-version:6.4 — none of those older toolchains can
+# parse the manifest (the same reason check-unsafe-flags.yml and the Linux leg of
+# SwiftTube.yml pin the nightly-6.4 container). So "source compatibility" here means
+# the inverse: does the package still build on the current 6.4 branch and on the
+# development trunk, catching upcoming-Swift breakage before it lands in a release.
+#
+# The trunk (nightly-main) leg is informational only (continue-on-error): a trunk
+# regression is the compiler's bug to fix, not ours, and shouldn't block merges.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  swift-source-compat-suite:
+    name: Build release on ${{ matrix.container }}
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, 'ci skip') }}
+    # Trunk breakage is the toolchain's problem, not the package's — let it report
+    # without failing the workflow.
+    continue-on-error: ${{ matrix.experimental }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Current 6.4 branch — the toolchain SwiftTube actually targets. Blocking.
+          - container: swiftlang/swift:nightly-6.4.x-noble
+            experimental: false
+          # Development trunk — forthcoming Swift. Informational early-warning leg.
+          - container: swiftlang/swift:nightly-main-noble
+            experimental: true
+
+    container: ${{ matrix.container }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Build for source compatibility
+        run: swift build --disable-sandbox --verbose --configuration release
